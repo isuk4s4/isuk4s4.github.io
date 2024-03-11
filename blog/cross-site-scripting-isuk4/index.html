@@ -1,19 +1,39 @@
 <!DOCTYPE html>
-<html lang="en" class="dark-mode">
+<html lang="en">
+
 <head>
-
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Cross site scripting | Isuk4</title>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="HandheldFriendly" content="True" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
-    <link rel="preload" as="style" href="../assets/built/screen.css@v=8d3d3289a3.css" />
-    <link rel="preload" as="script" href="../assets/built/casper.js@v=8d3d3289a3" />
+    <link rel="stylesheet" href="../assets/built/screen.css@v=f9beed0598.css">
 
-    <link rel="stylesheet" type="text/css" href="../assets/built/screen.css@v=8d3d3289a3.css" />
 
-    <link rel="icon" href="../content/images/size/w256h256/format/jpeg/2024/03/1_ICFn54K4B9r5egMhF9qywQ--2--5.jpg" type="image/jpeg">
+    <style>
+        :root {
+            --background-color: #111111
+        }
+    </style>
+
+    <script>
+        /* The script for calculating the color contrast was taken from
+        https://gomakethings.com/dynamically-changing-the-text-color-based-on-background-color-contrast-with-vanilla-js/ */
+        var accentColor = getComputedStyle(document.documentElement).getPropertyValue('--background-color');
+        accentColor = accentColor.trim().slice(1);
+        var r = parseInt(accentColor.substr(0, 2), 16);
+        var g = parseInt(accentColor.substr(2, 2), 16);
+        var b = parseInt(accentColor.substr(4, 2), 16);
+        var yiq = ((r * 299) + (g * 587) + (b * 114)) / 1000;
+        var textColor = (yiq >= 128) ? 'dark' : 'light';
+
+        document.documentElement.className = `has-${textColor}-text`;
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,700&display=swap" rel="stylesheet">
+
+    <link rel="icon" href="../content/images/size/w256h256/2024/03/Group-5-1--1-.png" type="image/png">
     <link rel="canonical" href="index.html">
     <meta name="referrer" content="no-referrer-when-downgrade">
     
@@ -35,6 +55,8 @@ how it can be dangerous
     <meta property="og:image" content="http://localhost:2368/content/images/2024/03/1_x6wbwE5SIgsO02O3ONbQSg.webp">
     <meta property="article:published_time" content="2024-03-10T12:41:26.000Z">
     <meta property="article:modified_time" content="2024-03-10T12:41:26.000Z">
+    <meta property="article:tag" content="Web exploits">
+    
     <meta property="article:publisher" content="https://www.facebook.com/isuka.cracker">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Cross site scripting | Isuk4">
@@ -53,6 +75,8 @@ how it can be dangerous
     <meta name="twitter:image" content="http://localhost:2368/content/images/2024/03/1_x6wbwE5SIgsO02O3ONbQSg.webp">
     <meta name="twitter:label1" content="Written by">
     <meta name="twitter:data1" content="Isuka sanuj">
+    <meta name="twitter:label2" content="Filed under">
+    <meta name="twitter:data2" content="Web exploits">
     <meta name="twitter:site" content="@ghost">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="520">
@@ -67,7 +91,7 @@ how it can be dangerous
         "url": "http://localhost:2368/",
         "logo": {
             "@type": "ImageObject",
-            "url": "http://localhost:2368/content/images/size/w256h256/format/jpeg/2024/03/1_ICFn54K4B9r5egMhF9qywQ--2--5.jpg"
+            "url": "http://localhost:2368/content/images/2024/03/Group-5-1--1--1.png"
         }
     },
     "author": {
@@ -86,6 +110,7 @@ how it can be dangerous
         "width": 1200,
         "height": 520
     },
+    "keywords": "Web exploits",
     "description": "So lets begin\n\n\nWhat is Cross site scripting\n\nif a website that directly renders user input it can be execute a html or js code that’s what we called xss or cross site scripting.\n\n\nhow it can be dangerous\n\n 1. Code Execution: One of the primary dangers of XSS is that it allows attackers to execute arbitrary code in the context of a user’s browser. This means the attacker can perform actions on behalf of the user, such as stealing sensitive information (like login credentials or session tokens), ",
     "mainEntityOfPage": "http://localhost:2368/cross-site-scripting-isuk4/"
 }
@@ -97,85 +122,69 @@ how it can be dangerous
     <script defer src="https://cdn.jsdelivr.net/ghost/sodo-search@~1.1/umd/sodo-search.min.js" data-key="26b2165395d797e61c718352f9" data-styles="https://cdn.jsdelivr.net/ghost/sodo-search@~1.1/umd/main.css" data-sodo-search="http://localhost:2368/" crossorigin="anonymous"></script><style>:root {--ghost-accent-color: #101010;}</style>
     
     <link href="http://localhost:2368/webmentions/receive/" rel="webmention">
-
 </head>
-<body class="post-template is-head-left-logo has-sans-body has-cover">
-<div class="viewport">
 
-    <header id="gh-head" class="gh-head outer">
-        <div class="gh-head-inner inner">
-            <div class="gh-head-brand">
-                <a class="gh-head-logo no-image" href="../index.html">
-                        Isuk4 
+<body class="post-template tag-web-exploits is-font-sans">
+<div class="gh-site">
+
+        
+<header id="gh-head" class="gh-head gh-outer is-head-middle-logo">
+    <div class="gh-head-inner gh-inner">
+        <div class="gh-head-brand">
+            <div class="gh-head-brand-wrapper">
+                <a class="gh-head-logo" href="../index.html">
+                        <img src="../content/images/2024/03/Group-5-1--1--1.png" alt="Isuk4 ">
                 </a>
-                <button class="gh-search gh-icon-btn" aria-label="Search this site" data-ghost-search><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" width="20" height="20"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg></button>
-                <button class="gh-burger"></button>
             </div>
+            <button class="gh-search gh-icon-btn" aria-label="Search this site" data-ghost-search><svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+    <path d="M17.5 17.5L12.5 12.5L17.5 17.5ZM14.1667 8.33333C14.1667 9.09938 14.0158 9.85792 13.7226 10.5657C13.4295 11.2734 12.9998 11.9164 12.4581 12.4581C11.9164 12.9998 11.2734 13.4295 10.5657 13.7226C9.85792 14.0158 9.09938 14.1667 8.33333 14.1667C7.56729 14.1667 6.80875 14.0158 6.10101 13.7226C5.39328 13.4295 4.75022 12.9998 4.20854 12.4581C3.66687 11.9164 3.23719 11.2734 2.94404 10.5657C2.65088 9.85792 2.5 9.09938 2.5 8.33333C2.5 6.78624 3.11458 5.30251 4.20854 4.20854C5.30251 3.11458 6.78624 2.5 8.33333 2.5C9.88043 2.5 11.3642 3.11458 12.4581 4.20854C13.5521 5.30251 14.1667 6.78624 14.1667 8.33333Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+</svg>
+</button>
+            <button class="gh-burger"></button>
+        </div>
 
-            <nav class="gh-head-menu">
-                <ul class="nav">
+        <nav class="gh-head-menu">
+            <ul class="nav">
     <li class="nav-home"><a href="../index.html">Home</a></li>
     <li class="nav-about"><a href="../about-this-site/index.html">About</a></li>
+    <li class="nav-web"><a href="../tag/web-exploits/index.html">Web</a></li>
+    <li class="nav-fun"><a href="../tag/fun-stuff/index.html">Fun</a></li>
 </ul>
 
-            </nav>
+        </nav>
 
-            <div class="gh-head-actions">
-                        <button class="gh-search gh-icon-btn" data-ghost-search><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" width="20" height="20"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg></button>
-            </div>
-        </div>
-    </header>
-
-    <div class="site-content">
         
+    </div>
+</header>
+
+    
+
+<main class="gh-main">
+    <article class="gh-article post tag-web-exploits">
+
+        <header class="gh-article-header gh-canvas">
+            <span class="gh-article-meta"><!--
+            -->
+                        <a class="gh-article-meta-tag" href="../tag/web-exploits/index.html">Web exploits</a>
+<!--
+            --></span>
+
+            <h1 class="gh-article-title">Cross site scripting | Isuk4</h1>
 
 
-
-<main id="site-main" class="site-main">
-<article class="article post image-small">
-
-    <header class="article-header gh-canvas">
-
-        <div class="article-tag post-card-tags">
-        </div>
-
-        <h1 class="article-title">Cross site scripting | Isuk4</h1>
-
-
-        <div class="article-byline">
-        <section class="article-byline-content">
-
-            <ul class="author-list">
-                <li class="author-list-item">
-                    <a href="../author/isuka/index.html" class="author-avatar author-profile-image"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path d="M3.513 18.998C4.749 15.504 8.082 13 12 13s7.251 2.504 8.487 5.998C18.47 21.442 15.417 23 12 23s-6.47-1.558-8.487-4.002zM12 12c2.21 0 4-2.79 4-5s-1.79-4-4-4-4 1.79-4 4 1.79 5 4 5z" fill="#FFF"/></g></svg>
-</a>
-                </li>
-            </ul>
-
-            <div class="article-byline-meta">
-                <h4 class="author-name"><a href="../author/isuka/index.html">Isuka sanuj</a></h4>
-                <div class="byline-meta-content">
-                    <time class="byline-meta-date" datetime="2024-03-10">Mar 10, 2024</time>
-                        <span class="byline-reading-time"><span class="bull">&bull;</span> 4 min read</span>
-                </div>
-            </div>
-
-        </section>
-        </div>
-
-            <figure class="article-image">
-                <img
-                    srcset="../content/images/size/w300/2024/03/1_x6wbwE5SIgsO02O3ONbQSg.webp 300w,
-                           ../content/images/size/w600/2024/03/1_x6wbwE5SIgsO02O3ONbQSg.webpp 600w,
-                          ../content/images/size/w1000/2024/03/1_x6wbwE5SIgsO02O3ONbQSg.webpbp 1000w,
-                         ../content/images/size/w2000/2024/03/1_x6wbwE5SIgsO02O3ONbQSg.webpebp 2000w"
-                    sizes="(min-width: 1400px) 1400px, 92vw"
-                    src="../content/images/size/w2000/2024/03/1_x6wbwE5SIgsO02O3ONbQSg.webp"
-                    alt="Cross site scripting | Isuk4"
-                />
-            </figure>
-
-    </header>
+                    <figure class="gh-article-image kg-width-wide">
+                        <img
+                            srcset="../content/images/size/w300/2024/03/1_x6wbwE5SIgsO02O3ONbQSg.webp 300w,
+                                   ../content/images/size/w720/2024/03/1_x6wbwE5SIgsO02O3ONbQSg.webpp 720w,
+                                  ../content/images/size/w960/2024/03/1_x6wbwE5SIgsO02O3ONbQSg.webpbp 960w,
+                                 ../content/images/size/w1200/2024/03/1_x6wbwE5SIgsO02O3ONbQSg.webpebp 1200w,
+                                ../content/images/size/w2000/2024/03/1_x6wbwE5SIgsO02O3ONbQSg.webpwebp 2000w"
+                            sizes="(max-width: 1200px) 100vw, 1200px"
+                            src="../content/images/size/w1200/2024/03/1_x6wbwE5SIgsO02O3ONbQSg.webp"
+                            alt="Cross site scripting | Isuk4"
+                        >
+                    </figure>
+        </header>
 
     <section class="gh-content gh-canvas">
         <p><strong>So lets begin</strong></p><h1 id="what-is-cross-site-scripting">What is Cross site scripting</h1><p>if a website that directly renders user input it can be execute a html or js code that’s what we called xss or cross site scripting.</p><h1 id="how-it-can-be-dangerous"><strong>how it can be dangerous</strong></h1><ol><li><strong>Code Execution:</strong>&nbsp;One of the primary dangers of XSS is that it allows attackers to execute arbitrary code in the context of a user’s browser. This means the attacker can perform actions on behalf of the user, such as stealing sensitive information (like login credentials or session tokens), manipulating the appearance of the web page, or performing actions on the user’s behalf without their consent.</li><li><strong>Session Hijacking:</strong>&nbsp;By stealing session cookies through XSS, an attacker can impersonate a legitimate user and gain unauthorized access to their accounts. This could lead to account compromise and unauthorized actions on the victim’s behalf.</li><li><strong>Data Theft:</strong>&nbsp;XSS can be used to extract sensitive data from a user’s browser. For example, an attacker might craft a malicious script that sends user data (such as passwords or personal information) to a server under the attacker’s control.</li><li><strong>Phishing Attacks:</strong>&nbsp;XSS can be employed to create realistic-looking phishing pages. When users unknowingly interact with these pages, their login credentials or other sensitive information can be captured by the attacker.</li><li><strong>Drive-by Downloads:</strong>&nbsp;In some cases, XSS can be used to deliver malicious payloads, such as malware or other exploit code, to a user’s system. This can lead to further compromises beyond the scope of the web application.</li><li><strong>Defacement:</strong>&nbsp;XSS can be used to deface websites, altering the appearance of the site to spread political or ideological messages, causing reputational damage to the affected organization.</li><li><strong>SEO Poisoning:</strong>&nbsp;Attackers can use XSS to inject links or content that manipulates search engine rankings, redirecting users to malicious websites or spreading malware.</li></ol><p>ok ima gonna explain about three types</p><h1 id="main-three-types-of-xss">Main Three types of xss</h1><ul><li><strong>Stored XSS (Persistent XSS):</strong>&nbsp;In this type, the malicious script is permanently stored on the target server, often in a database. When a user accesses a particular page or resource containing the injected script, it is retrieved and executed in their browser.</li><li><strong>Reflected XSS (Non-Persistent XSS):</strong>&nbsp;In this case, the malicious script is embedded in a URL or another input, and it is immediately reflected back to the user. The attack is typically carried out by tricking the user into clicking on a crafted link that contains the malicious payload.</li><li><strong>DOM-based XSS:</strong>&nbsp;This occurs when the DOM (Document Object Model) is manipulated by malicious scripts on the client side. The attack takes place within the Document Object Model, and the injected script is processed by the client’s browser.</li></ul><h1 id="dom-invader">DOM Invader</h1><p>DOM Invader is tool that made by Portswigger.that can read dom data in web.so what is that doing for us😑</p><figure class="kg-card kg-image-card"><img src="https://miro.medium.com/v2/resize:fit:640/1*-dLUICaQ7jY84-n9w9oPiw.gif" class="kg-image" alt="" loading="lazy" width="640" height="640"></figure><p>if it can find DOM data.it can finds dom based xss to</p><p>so let me give you a example</p><figure class="kg-card kg-image-card"><img src="https://miro.medium.com/v2/resize:fit:513/1*vqT2QRsHpkotTBFklxfPCg.png" class="kg-image" alt="" loading="lazy" width="513" height="536"></figure><p>Hmm its like its search for text “Isuk4” in DOM</p><figure class="kg-card kg-image-card"><img src="https://miro.medium.com/v2/resize:fit:700/1*hRbHpW5RoMjemJY3ZdKOKg.png" class="kg-image" alt="" loading="lazy" width="700" height="373"></figure><p>So i search it to check if DOM Invader can find that text in DOM.So it found it.yeeey😉</p><figure class="kg-card kg-image-card"><img src="https://miro.medium.com/v2/resize:fit:700/1*i1TEOnFhDVbewzJzc4KRWg.png" class="kg-image" alt="" loading="lazy" width="700" height="181"></figure><p>so when i click exploit.Booom💥💥</p><figure class="kg-card kg-image-card"><img src="https://miro.medium.com/v2/resize:fit:700/1*tjxufOFWhiA0udxUbVsQFw.png" class="kg-image" alt="" loading="lazy" width="700" height="95"></figure><p>So like we talked about plenty of thing.mmm and I think we need to talk about Cookie with xss.</p><h1 id="cookie-stealing-with-xsss">Cookie stealing with xsss</h1><p>So i think you know that js can get cookie values.bro if you don’t know just type alert(document.cookie); in you’re browser console</p><figure class="kg-card kg-image-card"><img src="https://miro.medium.com/v2/resize:fit:599/1*UTJ4CeS9ddwIj1NZ-GffoA.png" class="kg-image" alt="" loading="lazy" width="599" height="199"></figure><figure class="kg-card kg-image-card"><img src="https://miro.medium.com/v2/resize:fit:394/1*eNPUFvb8zYwFndJa2P29jg.png" class="kg-image" alt="" loading="lazy" width="394" height="187"></figure><p>Ok now you know so lets write script for it baby</p><pre><code class="language-Python">from http.server import BaseHTTPRequestHandler, HTTPServer
@@ -216,171 +225,22 @@ if __name__ == '__main__':
     </section>
 
 
-</article>
-</main>
+</article>    </main>
 
 
 
+    
+<footer class="gh-foot gh-outer">
+  <div class="gh-foot-inner gh-inner">
+    <nav class="gh-foot-menu">
+      
+    </nav>
 
-            <aside class="read-more-wrap outer">
-                <div class="read-more inner">
-                        
-<article class="post-card post">
-
-    <a class="post-card-image-link" href="../era-of-hacking-with-ai/index.html">
-
-        <img class="post-card-image"
-            srcset="../content/images/size/w300/2024/03/1_VqPWR0Kj4yeHtm8xqLtwzw.webp 300w,
-                   ../content/images/size/w600/2024/03/1_VqPWR0Kj4yeHtm8xqLtwzw.webpp 600w,
-                  ../content/images/size/w1000/2024/03/1_VqPWR0Kj4yeHtm8xqLtwzw.webpbp 1000w,
-                 ../content/images/size/w2000/2024/03/1_VqPWR0Kj4yeHtm8xqLtwzw.webpebp 2000w"
-            sizes="(max-width: 1000px) 400px, 800px"
-            src="../content/images/size/w600/2024/03/1_VqPWR0Kj4yeHtm8xqLtwzw.webp"
-            alt="Era of hacking with AI"
-            loading="lazy"
-        />
-
-
-    </a>
-
-    <div class="post-card-content">
-
-        <a class="post-card-content-link" href="../era-of-hacking-with-ai/index.html">
-            <header class="post-card-header">
-                <div class="post-card-tags">
-                </div>
-                <h2 class="post-card-title">
-                    Era of hacking with AI
-                </h2>
-            </header>
-                <div class="post-card-excerpt">So recently I went to Bugcrowd and saw a report paper called Inside the Mind of a Hacker So when I read that newspaper, I remembered what was done these days.so Lets start.
-
-
-process of Generative ai
-
-So AI generates the response to our input as they were trained.</div>
-        </a>
-
-        <footer class="post-card-meta">
-            <time class="post-card-meta-date" datetime="2024-03-10">Mar 10, 2024</time>
-                <span class="post-card-meta-length">3 min read</span>
-        </footer>
-
+    <div class="gh-copyright">
+        Isuk4.com © 2024
     </div>
-
-</article>
-                        
-<article class="post-card post">
-
-    <a class="post-card-image-link" href="../payload-will-after-you/index.html">
-
-        <img class="post-card-image"
-            srcset="../content/images/size/w300/2024/03/1_ppjPCsQtXMUAqWO0Pic_-A.webp 300w,
-                   ../content/images/size/w600/2024/03/1_ppjPCsQtXMUAqWO0Pic_-A.webpp 600w,
-                  ../content/images/size/w1000/2024/03/1_ppjPCsQtXMUAqWO0Pic_-A.webpbp 1000w,
-                 ../content/images/size/w2000/2024/03/1_ppjPCsQtXMUAqWO0Pic_-A.webpebp 2000w"
-            sizes="(max-width: 1000px) 400px, 800px"
-            src="../content/images/size/w600/2024/03/1_ppjPCsQtXMUAqWO0Pic_-A.webp"
-            alt="Payload will after you"
-            loading="lazy"
-        />
-
-
-    </a>
-
-    <div class="post-card-content">
-
-        <a class="post-card-content-link" href="../payload-will-after-you/index.html">
-            <header class="post-card-header">
-                <div class="post-card-tags">
-                </div>
-                <h2 class="post-card-title">
-                    Payload will after you
-                </h2>
-            </header>
-                <div class="post-card-excerpt">Yo homies I’m back with another post.so lets start
-
-Before we dive into second order sql injection we need to talk about what is sql injecion
-
-
-What is Sql injection
-
-So Sql injection is attack that inject a malicious sql query to Application that can be execute
-
-SELECT</div>
-        </a>
-
-        <footer class="post-card-meta">
-            <time class="post-card-meta-date" datetime="2024-03-10">Mar 10, 2024</time>
-                <span class="post-card-meta-length">3 min read</span>
-        </footer>
-
-    </div>
-
-</article>
-                        
-<article class="post-card post">
-
-    <a class="post-card-image-link" href="../real-time-exploitation-isuk4/index.html">
-
-        <img class="post-card-image"
-            srcset="../content/images/size/w300/2024/03/1_ErzjYQO6rAWqte5zYK1_oA.webp 300w,
-                   ../content/images/size/w600/2024/03/1_ErzjYQO6rAWqte5zYK1_oA.webpp 600w,
-                  ../content/images/size/w1000/2024/03/1_ErzjYQO6rAWqte5zYK1_oA.webpbp 1000w,
-                 ../content/images/size/w2000/2024/03/1_ErzjYQO6rAWqte5zYK1_oA.webpebp 2000w"
-            sizes="(max-width: 1000px) 400px, 800px"
-            src="../content/images/size/w600/2024/03/1_ErzjYQO6rAWqte5zYK1_oA.webp"
-            alt="Real time exploitation | Isuk4"
-            loading="lazy"
-        />
-
-
-    </a>
-
-    <div class="post-card-content">
-
-        <a class="post-card-content-link" href="../real-time-exploitation-isuk4/index.html">
-            <header class="post-card-header">
-                <div class="post-card-tags">
-                </div>
-                <h2 class="post-card-title">
-                    Real time exploitation | Isuk4
-                </h2>
-            </header>
-                <div class="post-card-excerpt">Yo yo homies.im back with another post.so lets start
-
-Hmmm.Did you chat with live agents on any day? If you did that, you know that it’s a real time chat. like live agent can see you’re Mg in real time
-
-so how does developer make</div>
-        </a>
-
-        <footer class="post-card-meta">
-            <time class="post-card-meta-date" datetime="2024-03-10">Mar 10, 2024</time>
-                <span class="post-card-meta-length">2 min read</span>
-        </footer>
-
-    </div>
-
-</article>
-                </div>
-            </aside>
-
-
-
-    </div>
-
-    <footer class="site-footer outer" style="position:relative;
-">
-            <div>
-
-        <a style="    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);" href="../index.html">Isuk4 </a> &copy; 2024
-            </div>
-            
-    </footer>
-
+  </div>
+</footer>
 </div>
 
     <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
@@ -424,24 +284,10 @@ so how does developer make</div>
         </div>
     </div>
 </div>
-<script
-    src="https://code.jquery.com/jquery-3.5.1.min.js"
-    integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
-    crossorigin="anonymous">
-</script>
-<script src="../assets/built/casper.js@v=8d3d3289a3"></script>
-<script>
-$(document).ready(function () {
-    // Mobile Menu Trigger
-    $('.gh-burger').click(function () {
-        $('body').toggleClass('gh-head-open');
-    });
-    // FitVids - Makes video embeds responsive
-    $(".gh-content").fitVids();
-});
-</script>
+<script src="../assets/built/main.min.js@v=f9beed0598"></script>
 
 
 
 </body>
+
 </html>
