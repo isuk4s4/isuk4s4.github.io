@@ -392,7 +392,8 @@ a:hover {
 .pswp__button,
 .pswp__button--arrow--left:before,
 .pswp__button--arrow--right:before {
-  background: url(http://localhost:2368/assets/images/default-skin.png) 0 0 no-repeat;
+  background: url(http://localhost:2368/assets/images/default-skin.png) 0 0
+    no-repeat;
   background-size: 264px 88px;
   height: 44px;
   width: 44px;
@@ -540,7 +541,8 @@ a:hover {
   opacity: 1;
 }
 .pswp__preloader--active .pswp__preloader__icn {
-  background: url(http://localhost:2368/assets/images/preloader.gif) 0 0 no-repeat;
+  background: url(http://localhost:2368/assets/images/preloader.gif) 0 0
+    no-repeat;
 }
 .pswp--css_animation .pswp__preloader--active {
   opacity: 1;
@@ -777,7 +779,7 @@ a:hover {
   font-size: calc(1.2em * var(--font-multiplier, 1));
 }
 .gh-content a {
-  color: var(--ghost-accent-color);
+  color: white;
   text-decoration: underline;
   word-break: break-word;
 }
