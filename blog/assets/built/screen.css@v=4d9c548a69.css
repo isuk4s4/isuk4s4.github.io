@@ -777,7 +777,7 @@ a:hover {
   font-size: calc(1.2em * var(--font-multiplier, 1));
 }
 .gh-content a {
-  color: white;
+  color: var(--ghost-accent-color);
   text-decoration: underline;
   word-break: break-word;
 }
