@@ -2209,7 +2209,5 @@ pre {
   background: #23292f;
   color: rgb(206 212 217 / var(--tw-text-opacity));
   border-radius: 5px;
-  width: 100%;
-  min-width: fit-content;
   overflow-x: scroll;
 }
