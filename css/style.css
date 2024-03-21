@@ -27,7 +27,7 @@ body {
 .banner__img .img {
   height: 20vh;
   width: 50%;
-  background: url("https://isuk4s.sirv.com/Images/banner__img.webp");
+  background: url("../img/banner__img.webp");
   background-position: right;
   background-repeat: no-repeat;
   background-size: cover;
