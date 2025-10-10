@@ -1,0 +1,168 @@
+@import url('https://fonts.googleapis.com/css2?family=Audiowide&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("../img/Vector.svg");
+    background-size: contain;
+    background-position: center;
+    background-repeat: repeat-y;
+}
+body{
+    background-color: #F5F7FA;
+}
+.content {
+    position: absolute;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Audiowide", sans-serif;
+}
+/* New wrapper div style (was the first inline style) */
+.body-wrapper {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+}
+
+/* Style for the .content div (with id="home") */
+.content#home {
+    height: 93%;
+}
+
+/* Style for the .square_image div */
+.square_image {
+    display: flex;
+    position: absolute;
+    flex-direction: row-reverse;
+    justify-content: center;
+    width: 43%; /* This is the desktop width */
+}
+
+/* Style for the .image div (with id="img") */
+.image#img {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+/* Style for the .model div */
+.model {
+    width: 78%;
+}
+
+/* Style for the <img> inside .model */
+.model img {
+    width: 100%;
+    border-radius: 4px;
+    rotate: 356deg;
+}
+
+/* Style for the <img> inside .name */
+.name img {
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 100%; /* This is the desktop width */
+}
+
+/* Style for the .career div */
+.career {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    position: absolute;
+    left: -22%;
+    top: 71%;
+    font-family: Audiowide;
+}
+
+/* Style for the .nav div */
+.nav {
+    position: absolute;
+    bottom: 0; /* This is the desktop position */
+    width: 50%; /* This is the desktop width */
+    display: flex;
+    justify-content: center;
+}
+
+/* Style for the .list div */
+.list {
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+}
+
+/* Style for the active item */
+.item#active {
+    border-bottom: 2px solid #B75A36;
+}
+
+
+nav{
+    font-family: "Audiowide", sans-serif;
+}
+
+.topnav{
+    position: fixed;
+    width: 100%;
+    padding: 1.5rem 0 1.5rem 0;
+    display: flex;
+    justify-content: space-between;
+}
+.logo{
+    margin-left: 1.5rem;
+    font-size: 1.5rem;
+}
+.terminal{
+    margin-right: 2rem;
+}
+a{
+    text-decoration: none;
+    color: black
+}
+
+
+@media (max-width: 600px) {
+
+    /* Simplified mobile styles - removed duplicated rules */
+
+    .square_image{
+        width: 100%; /* Overrides desktop 43% */
+    }
+
+    /* .model is already width: 78% outside the media query */
+    .model img {
+        rotate: unset; /* Removing the desktop rotate: 356deg */
+    }
+
+    .name img {
+        width: 93%; /* Overrides desktop 100% */
+    }
+
+    .career {
+        left: unset; /* Overrides desktop left: -22% */
+        top: unset; /* Overrides desktop top: 71% */
+        bottom: -24%; /* New mobile position */
+        text-align: center;
+    }
+
+    .nav {
+        bottom: 4%; /* Overrides desktop bottom: 0 */
+        width: 100%; /* Overrides desktop 50% */
+    }
+}
