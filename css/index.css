@@ -166,3 +166,17 @@ a{
         width: 100%; /* Overrides desktop 50% */
     }
 }
+@keyframes rotate {
+    0%{
+            rotate: 356deg;
+    }
+    50%{
+        rotate: 358deg;
+    }
+    100%{
+            rotate: 356deg;
+    }
+}
+.model img:hover{
+animation: rotate 0.1s linear infinite;
+}
